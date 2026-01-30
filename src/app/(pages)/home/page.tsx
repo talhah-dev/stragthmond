@@ -1,21 +1,31 @@
+"use client";
+
 import SiteFooter from '@/components/Footer'
 import HomeAboutQuote from '@/components/Home/HomeAboutQuote'
 import HomeCommunities from '@/components/Home/HomeCommunities'
 import HomeFeaturedProperties from '@/components/Home/HomeFeaturedProperties'
 import HomeHero from '@/components/Home/HomeHero'
 import HomeNewsInsights from '@/components/Home/HomeNewsInsights'
+import HomeLogoMarquee from '@/components/Home/HomePartnersLoop'
 import HomeServices from '@/components/Home/HomeServices'
 import HomeTimeline from '@/components/Home/HomeTimeline'
 import HomeVideoFeatureSection from '@/components/Home/HomeVideoFeatureSection'
-import HomeWhyStrathmond from '@/components/Home/HomeWhyStrathmond'
 import SiteNavbar from '@/components/Navbar'
-import React from 'react'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 export default function HomePg() {
+    useEffect(() => {
+        AOS.init({
+            duration: 600,
+        });
+    }, []);
     return (
         <div>
             <SiteNavbar />
             <HomeHero />
+            {/* <HomeLogoMarquee /> */}
             <HomeAboutQuote />
             {/* <section className="bg-[#F8F8FF]">
                 <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">

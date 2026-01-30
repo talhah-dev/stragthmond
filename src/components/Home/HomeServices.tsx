@@ -51,16 +51,16 @@ export default function HomeServices() {
             <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-2xl">
-                        <p className="text-sm font-medium text-[#00292D]/70">Explore</p>
-                        <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
+                        <p data-aos="fade-up" className="text-sm font-medium text-[#00292D]/70">Explore</p>
+                        <h2 data-aos="fade-up" className="mt-2 text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
                             Everything you need to move with confidence.
                         </h2>
-                        <p className="mt-3 text-pretty text-base text-[#00292D]/70 sm:text-lg">
+                        <p data-aos="fade-up" className="mt-3 text-pretty text-base text-[#00292D]/70 sm:text-lg">
                             Browse curated options across Dubai’s key communities and price ranges.
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div data-aos="fade-up" className="flex flex-wrap gap-2">
                         <Button asChild variant="outline" className="border-[#00292D]/15 bg-transparent">
                             <Link href="/properties">View all properties</Link>
                         </Button>
@@ -71,7 +71,7 @@ export default function HomeServices() {
                 </div>
 
                 <div className="mt-10 grid gap-6 lg:grid-cols-4">
-                    <div className="">
+                    <div className="" data-aos="fade-up" >
                         <PropertyCard
                             image="https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D"
                             href="/buy"
@@ -81,7 +81,8 @@ export default function HomeServices() {
                             tone="mint"
                         />
                     </div>
-                    <div className="">
+                    <div className="" data-aos="fade-up" data-aos-delay="150"
+>
                         <PropertyCard
                             image="https://images.unsplash.com/photo-1685514823717-7e1ff6ee0563?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fHw%3D"
                             href="/buy"
@@ -92,7 +93,7 @@ export default function HomeServices() {
                         />
                     </div>
 
-                    <div className="">
+                    <div className="" data-aos="fade-up" data-aos-delay="300">
                         <PropertyCard
                             image="https://images.unsplash.com/photo-1733413788848-6f9e0c1c414c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHx8"
                             href="/buy"
@@ -103,7 +104,7 @@ export default function HomeServices() {
                         />
                     </div>
 
-                    <div className="">
+                    <div className="" data-aos="fade-up" data-aos-delay="450">
                         <PropertyCard
                             image="https://images.unsplash.com/photo-1686164748506-4311ba437c24?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8"
                             href="/rent"
@@ -114,7 +115,7 @@ export default function HomeServices() {
                         />
                     </div>
 
-                    <div className="">
+                    <div className="" data-aos="fade-up">
                         <PropertyCard
                             image="https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI0fHx8ZW58MHx8fHx8"
                             href="/rent"
@@ -125,7 +126,8 @@ export default function HomeServices() {
                         />
                     </div>
 
-                    <div className="">
+                    <div className="" data-aos="fade-up" data-aos-delay="150"
+>
                         <PropertyCard
                             image="https://images.unsplash.com/photo-1748063578185-3d68121b11ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDMxfHx8ZW58MHx8fHx8"
                             href="/buy"
@@ -136,7 +138,7 @@ export default function HomeServices() {
                         />
                     </div>
 
-                    <div className="">
+                    <div className="" data-aos="fade-up" data-aos-delay="300">
                         <PropertyCard
                             image="https://images.unsplash.com/photo-1733413788252-e83ecab5ea75?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDU0fHx8ZW58MHx8fHx8"
                             href="/buy"
@@ -147,7 +149,7 @@ export default function HomeServices() {
                         />
                     </div>
 
-                    <div className="">
+                    <div className="" data-aos="fade-up" data-aos-delay="450">
                         <PropertyCard
                             image="https://plus.unsplash.com/premium_photo-1733342586521-6d04831831bd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDY3fHx8ZW58MHx8fHx8"
                             href="/buy"

@@ -62,16 +62,16 @@ export default function HomeTimeline() {
             <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-2xl">
-                        <p className="text-sm font-medium text-[#00292D]/70">Process</p>
-                        <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
+                        <p data-aos="fade-up" className="text-sm font-medium text-[#00292D]/70">Process</p>
+                        <h2 data-aos="fade-up" className="mt-2 text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
                             A timeline designed for clarity.
                         </h2>
-                        <p className="mt-3 text-pretty text-base text-[#00292D]/70 sm:text-lg">
+                        <p data-aos="fade-up" className="mt-3 text-pretty text-base text-[#00292D]/70 sm:text-lg">
                             One clean path—from discovery to decision—built to reduce friction and improve outcomes.
                         </p>
                     </div>
 
-                    <div className="inline-flex items-center rounded-full bg-[#FFEEB4] px-4 py-2 text-sm font-semibold text-[#00292D]">
+                    <div data-aos="fade-up" className="inline-flex items-center rounded-full bg-[#FFEEB4] px-4 py-2 text-sm font-semibold text-[#00292D]">
                         Clarity • Structure • Confidence
                     </div>
                 </div>
@@ -86,7 +86,7 @@ export default function HomeTimeline() {
                             const isRight = idx % 2 === 1;
 
                             return (
-                                <li key={s.tag} className="relative">
+                                <li data-aos="fade-up"  key={s.tag} className="relative">
                                     <div className="absolute left-5 top-7 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2">
                                         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#00292D] text-[#F8F8FF] shadow-sm ring-1 ring-[#00292D]/10">
                                             <Icon className="h-5 w-5" />

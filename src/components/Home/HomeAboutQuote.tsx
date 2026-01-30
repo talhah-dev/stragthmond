@@ -10,13 +10,13 @@ export default function HomeAboutQuote() {
                 <div className="">
                     <div className="">
                         <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
-                            <div className="lg:col-span-2">
+                            <div data-aos="fade-up" className="lg:col-span-2">
                                 <div className="font-semibold mt-3 text-xl uppercase tracking-widest text-[#00292D]/75">
                                     about us
                                 </div>
                             </div>
 
-                            <div className="lg:col-span-10">
+                            <div data-aos="fade-up" data-aos-delay="200" className="lg:col-span-10">
                                 <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight text-[#00292D] sm:text-5xl">
                                     We guide decisions, not just listings.
                                     <br />
@@ -28,7 +28,7 @@ export default function HomeAboutQuote() {
                                         curated shortlists, transparent advice, and a clear process for buying, renting, selling,
                                         and off-plan opportunities.
                                     </p>
-                                    <img src="https://images.unsplash.com/photo-1738168246881-40f35f8aba0a?q=80&w=1228&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="rounded-2xl max-w-80" alt="" />
+                                    <img data-aos="zoom-in-up" src="https://images.unsplash.com/photo-1738168246881-40f35f8aba0a?q=80&w=1228&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="rounded-2xl max-w-80" alt="" />
                                 </div>
                             </div>
                         </div>

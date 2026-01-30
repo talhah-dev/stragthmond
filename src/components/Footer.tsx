@@ -30,13 +30,13 @@ export default function SiteFooterLight() {
                 <div className="rounded-3xl bg-white ring-1 ring-[#00292D]/10">
                     <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-12 lg:items-center">
                         <div className="lg:col-span-7">
-                            <div className="text-balance text-xl font-semibold md:text-start text-center tracking-tight text-[#00292D] sm:text-3xl">
+                            <div data-aos="fade" className="text-balance text-xl font-semibold md:text-start text-center tracking-tight text-[#00292D] sm:text-3xl">
                                 Join Strathmond email list to stay up to date about
                                 <span className="text-[#00292D]/80"> properties and opportunities in Dubai.</span>
                             </div>
                         </div>
 
-                        <div className="lg:col-span-5">
+                        <div data-aos="fade" className="lg:col-span-5">
                             <form
                                 onSubmit={(e) => e.preventDefault()}
                                 className="flex w-full items-center gap-2 rounded-full bg-[#F8F8FF] p-2 ring-1 ring-[#00292D]/10"

@@ -73,6 +73,7 @@ const insights = [
 function PostCard({ post }: { post: Post }) {
     return (
         <Link
+        data-aos="fade-up"
             href={`/news/${post.slug}`}
             className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md"
         >
@@ -114,16 +115,16 @@ export default function HomeNewsInsights() {
             <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-2xl">
-                        <p className="text-sm font-medium text-[#F8F8FF]/75">News & Insights</p>
-                        <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-[#F8F8FF] sm:text-4xl">
+                        <p data-aos="fade-up" className="text-sm font-medium text-[#F8F8FF]/75">News & Insights</p>
+                        <h2 data-aos="fade-up" className="mt-2 text-balance text-3xl font-semibold tracking-tight text-[#F8F8FF] sm:text-4xl">
                             Market context, practical guides, and off-plan updates.
                         </h2>
-                        <p className="mt-3 text-pretty text-base text-[#F8F8FF]/70 sm:text-lg">
+                        <p data-aos="fade-up" className="mt-3 text-pretty text-base text-[#F8F8FF]/70 sm:text-lg">
                             Read what matters—clear, concise, and designed to support better decisions.
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div data-aos="fade-up" className="flex flex-wrap gap-2">
                         <Button
                             asChild
                             variant="outline"
@@ -151,7 +152,7 @@ export default function HomeNewsInsights() {
                     </div>
 
                     <div className="lg:col-span-4">
-                        <div className="rounded-3xl border border-[#F8F8FF]/15 bg-[#F8F8FF]/5 p-6 backdrop-blur">
+                        <div data-aos="fade-up" className="rounded-3xl border border-[#F8F8FF]/15 bg-[#F8F8FF]/5 p-6 backdrop-blur">
                             <div className="text-sm font-semibold text-[#F8F8FF]">What you’ll get</div>
                             <div className="mt-2 text-sm text-[#F8F8FF]/70">
                                 A premium, decision-first reading experience.

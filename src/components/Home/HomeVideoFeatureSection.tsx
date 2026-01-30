@@ -23,22 +23,22 @@ export default function HomeVideoFeatureSection() {
             <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
                 <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
                     <div className="lg:col-span-7">
-                        <div className="inline-flex items-center rounded-full bg-[#D2C4FB]/20 px-3 py-1 text-xs font-semibold text-[#00292D] ring-1 ring-[#00292D]/10">
+                        <div data-aos="fade-up" className="inline-flex items-center rounded-full bg-[#D2C4FB]/20 px-3 py-1 text-xs font-semibold text-[#00292D] ring-1 ring-[#00292D]/10">
                             New feature
                         </div>
 
-                        <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
+                        <h2 data-aos="fade-up" className="mt-4 text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
                             Real estate for living and investments
                         </h2>
 
-                        <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-[#00292D]/70 sm:text-lg">
+                        <p data-aos="fade-up" className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-[#00292D]/70 sm:text-lg">
                             A premium, curated experience to help you buy, rent, sell, and explore off-plan projects with clarity and confidence.
                         </p>
                     </div>
 
                     <div className="lg:col-span-5">
                         <div className="space-y-6">
-                            <div className="flex gap-4">
+                            <div data-aos="fade-up" className="flex gap-4">
                                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white ring-1 ring-[#00292D]/10">
                                     <MessageSquareText className="h-5 w-5 text-[#00292D]" />
                                 </div>
@@ -50,7 +50,7 @@ export default function HomeVideoFeatureSection() {
                                 </div>
                             </div>
 
-                            <div className="flex gap-4">
+                            <div data-aos="fade-up" className="flex gap-4">
                                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white ring-1 ring-[#00292D]/10">
                                     <Zap className="h-5 w-5 text-[#00292D]" />
                                 </div>
@@ -62,18 +62,15 @@ export default function HomeVideoFeatureSection() {
                                 </div>
                             </div>
 
-                            <Button className="w-fit rounded-full bg-[#00292D] px-6 text-[#F8F8FF] hover:bg-[#00292D]/90">
+                            <Button data-aos="fade-up" className="w-fit rounded-full bg-[#00292D] px-6 text-[#F8F8FF] hover:bg-[#00292D]/90">
                                 Explore Strathmond
                             </Button>
                         </div>
                     </div>
                 </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                <div
+                    data-aos="zoom-in-up"
                     className="mt-12 overflow-hidden rounded-[28px] bg-white ring-1 ring-[#00292D]/10"
                 >
                     <div className="relative">
@@ -102,7 +99,7 @@ export default function HomeVideoFeatureSection() {
                             </button>
                         )}
                     </div>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

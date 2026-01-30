@@ -34,7 +34,7 @@ export default function SiteNavbar() {
     }, [pathname]);
 
     return (
-        <header className="sticky top-5 z-50 w-full">
+        <header data-aos="fade-down" className="sticky top-5 z-50 w-full">
             <div
                 className={[
                     "mx-auto px-2 sm:px-6 lg:px-8 transition-all duration-300",

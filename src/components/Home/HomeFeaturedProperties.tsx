@@ -27,7 +27,7 @@ const listings: Listing[] = [
         title: "Modern Villa in Dubai Hills Estate",
         location: "Dubai Hills Estate, Dubai",
         beds: 4,
-        image:"https://images.unsplash.com/photo-1678575326996-a1bf09b86158?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fHw%3D",
+        image: "https://images.unsplash.com/photo-1678575326996-a1bf09b86158?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fHw%3D",
         baths: 5,
         area: "3,120 sq ft",
         href: "/buy",
@@ -40,7 +40,7 @@ const listings: Listing[] = [
         title: "Luxury Apartment with Skyline Views",
         location: "Business Bay, Dubai",
         beds: 2,
-        image:"https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D",
+        image: "https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D",
         baths: 2,
         area: "1,240 sq ft",
         href: "/buy",
@@ -53,7 +53,7 @@ const listings: Listing[] = [
         title: "Family Villa Close to Park",
         location: "Dubai Creek Harbour, Dubai",
         beds: 5,
-        image:"https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
+        image: "https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
         baths: 6,
         area: "4,100 sq ft",
         href: "/buy",
@@ -66,7 +66,7 @@ const listings: Listing[] = [
         title: "Penthouse with Marina Views",
         location: "Bluewaters Island, Dubai",
         beds: 3,
-        image:"https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
+        image: "https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
         baths: 4,
         area: "2,250 sq ft",
         href: "/rent",
@@ -79,7 +79,7 @@ const listings: Listing[] = [
         title: "Elegant Apartment Near Metro",
         location: "Downtown Dubai, Dubai",
         beds: 1,
-        image:"https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
+        image: "https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
         baths: 2,
         area: "920 sq ft",
         href: "/rent",
@@ -92,7 +92,7 @@ const listings: Listing[] = [
         title: "Spacious Villa in Gated Community",
         location: "Dubai South, Dubai",
         beds: 4,
-        image:"https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
+        image: "https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
         baths: 4,
         area: "3,400 sq ft",
         href: "/rent",
@@ -104,7 +104,7 @@ const listings: Listing[] = [
         price: "From AED 980,000",
         title: "New Launch Waterfront Residences",
         location: "Dubai Harbour, Dubai",
-        image:"https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
+        image: "https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
         area: "Flexible layouts",
         href: "/off-plan",
         tag: "Launch",
@@ -115,7 +115,7 @@ const listings: Listing[] = [
         price: "From AED 1,450,000",
         title: "Premium Community Townhomes",
         location: "Dubai Hills Estate, Dubai",
-        image:"https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
+        image: "https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
         area: "Payment plan",
         href: "/off-plan",
         tag: "Limited",
@@ -126,21 +126,21 @@ const listings: Listing[] = [
         price: "From AED 1,120,000",
         title: "Creekside Living with Views",
         location: "Dubai Creek Harbour, Dubai",
-        image:"https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
+        image: "https://images.unsplash.com/photo-1722421492323-eaf9c401befe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODZ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
         area: "Handover soon",
         href: "/off-plan",
         tag: "Trending",
     },
 ];
 
-function ListingCard({ item }: { item: Listing }) {
+function ListingCard({ item, index, }: { item: Listing, index: number }) {
     return (
         <Link
-            href={item.href}
+            href={item.href} data-aos="fade-up" data-aos-delay={index * 150}
             className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md"
         >
             <div className="relative aspect-[16/14] w-full overflow-hidden">
-               <img src={item.image} className="
+                <img src={item.image} className="
                w-full h-full object-cover" alt="" />
             </div>
 
@@ -201,16 +201,16 @@ export default function HomeFeaturedProperties() {
             <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-2xl">
-                        <p className="text-sm font-medium text-[#00292D]/70">Listings</p>
-                        <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
+                        <p data-aos="fade-up" className="text-sm font-medium text-[#00292D]/70">Listings</p>
+                        <h2 data-aos="fade-up" className="mt-2 text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
                             Featured properties tailored to your next move.
                         </h2>
-                        <p className="mt-3 text-pretty text-base text-[#00292D]/70 sm:text-lg">
+                        <p data-aos="fade-up" className="mt-3 text-pretty text-base text-[#00292D]/70 sm:text-lg">
                             Browse a hand-picked selection across sale, rent, and off-plan opportunities.
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-2">
+                    <div data-aos="fade-up" className="flex flex-wrap items-center gap-2">
                         <div className="inline-flex rounded-2xl bg-white p-1 ring-1 ring-[#00292D]/10">
                             {(["Buy", "Rent", "Off Plan"] as const).map((t) => {
                                 const isActive = active === t;
@@ -241,8 +241,8 @@ export default function HomeFeaturedProperties() {
                 </div>
 
                 <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    {filtered.map((item) => (
-                        <ListingCard key={item.id} item={item} />
+                    {filtered.map((item, idx) => (
+                        <ListingCard key={item.id} index={idx} item={item} />
                     ))}
                 </div>
             </div>
