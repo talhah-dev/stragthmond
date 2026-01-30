@@ -7,6 +7,7 @@ type Community = {
     name: string;
     subtitle: string;
     listings: string;
+    image: string,
     href: string;
 };
 
@@ -15,36 +16,42 @@ const communities: Community[] = [
         name: "Dubai Hills Estate",
         subtitle: "Family villas & green living",
         listings: "120+ listings",
+        image: "https://images.unsplash.com/photo-1733413788848-6f9e0c1c414c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D",
         href: "/communities/dubai-hills-estate",
     },
     {
         name: "Dubai Creek Harbour",
         subtitle: "Waterfront skyline views",
         listings: "90+ listings",
+        image: "https://images.unsplash.com/photo-1758448756880-01dbaf85597d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8",
         href: "/communities/dubai-creek-harbour",
     },
     {
         name: "Business Bay",
         subtitle: "City living & investment",
         listings: "150+ listings",
+        image: "https://images.unsplash.com/photo-1756706718604-ef4af3970e33?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D",
         href: "/communities/business-bay",
     },
     {
         name: "Dubai Harbour",
         subtitle: "Premium waterfront lifestyle",
         listings: "70+ listings",
+        image: "https://images.unsplash.com/photo-1685514823717-7e1ff6ee0563?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fHw%3D",
         href: "/communities/dubai-harbour",
     },
     {
         name: "Bluewaters Island",
         subtitle: "Island lifestyle & marina views",
         listings: "45+ listings",
+        image: "https://images.unsplash.com/photo-1626249893783-cc4a9f66880a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI2fHx8ZW58MHx8fHx8",
         href: "/communities/bluewaters-island",
     },
     {
         name: "Dubai South",
         subtitle: "Value-led communities",
         listings: "60+ listings",
+        image: "https://images.unsplash.com/photo-1660797347557-4b100998d808?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM1fHx8ZW58MHx8fHx8",
         href: "/communities/dubai-south",
     },
 ];
@@ -60,10 +67,12 @@ function CommunityCard({ item, tone }: { item: Community; tone: "mint" | "lilac"
     return (
         <Link
             href={item.href}
-            className="group block overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md"
+            className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md"
         >
-            <div className={`relative h-32 w-full bg-gradient-to-br ${toneBg}`}>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(0,41,45,0.10),transparent_55%)]" />
+            <div className={`relative h-60 md:h-70 w-full bg-gradient-to-br ${toneBg}`}>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(0,41,45,0.10),transparent_55%)]" >
+                    <img src={item.image} className="w-full h-full object-cover" alt="" />
+                </div>
                 <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-[#00292D] ring-1 ring-[#00292D]/10 backdrop-blur">
                     <MapPin className="h-3.5 w-3.5" />
                     Community
@@ -116,7 +125,7 @@ export default function HomeCommunities() {
                     </div>
                 </div>
 
-                <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                     {communities.map((item, idx) => (
                         <CommunityCard key={item.name} item={item} tone={tones[idx % tones.length]} />
                     ))}

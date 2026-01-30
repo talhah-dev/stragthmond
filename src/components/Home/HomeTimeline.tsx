@@ -59,7 +59,7 @@ const steps: Step[] = [
 export default function HomeTimeline() {
     return (
         <section className="bg-[#F8F8FF]">
-            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-2xl">
                         <p className="text-sm font-medium text-[#00292D]/70">Process</p>

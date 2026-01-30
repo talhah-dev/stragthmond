@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function HomeAboutQuote() {
     return (
         <section className="bg-[#F8F8FF]">
-            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
                 <div className="">
                     <div className="">
                         <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
@@ -22,7 +22,7 @@ export default function HomeAboutQuote() {
                                     <br />
                                     Built on honesty, clarity, and a deep respect for your goals.
                                 </h2>
-                                <div className="mt-10 text-sm flex justify-between leading-relaxed text-[#00292D]/70">
+                                <div className="mt-10 text-sm flex md:flex-row flex-col gap-5 justify-between leading-relaxed text-[#00292D]/70">
                                     <p className="max-w-lg">
                                         In a market full of noise, Strathmond focuses on a premium, structured experience—
                                         curated shortlists, transparent advice, and a clear process for buying, renting, selling,

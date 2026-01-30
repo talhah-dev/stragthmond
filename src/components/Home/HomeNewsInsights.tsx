@@ -12,6 +12,7 @@ type Post = {
     excerpt: string;
     category: string;
     readTime: string;
+    image: string;
     date: string;
 };
 
@@ -23,6 +24,7 @@ const posts: Post[] = [
             "Key indicators, demand shifts, and pricing signals that can help you make smarter buy, rent, and investment decisions.",
         category: "Market",
         readTime: "6 min read",
+        image:"https://images.unsplash.com/photo-1733413788848-6f9e0c1c414c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D",
         date: "Jan 2026",
     },
     {
@@ -32,6 +34,7 @@ const posts: Post[] = [
             "A simple framework to evaluate payment plans, handover timelines, and risk—without getting lost in marketing.",
         category: "Off Plan",
         readTime: "5 min read",
+        image:"https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D",
         date: "Jan 2026",
     },
     {
@@ -41,6 +44,7 @@ const posts: Post[] = [
             "A clean checklist to reduce surprises—what to verify before you sign, and how to plan your move-in smoothly.",
         category: "Rent",
         readTime: "7 min read",
+        image:"https://images.unsplash.com/photo-1706808849780-7a04fbac83ef?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         date: "Jan 2026",
     },
 ];
@@ -70,11 +74,10 @@ function PostCard({ post }: { post: Post }) {
     return (
         <Link
             href={`/news/${post.slug}`}
-            className="group block overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md"
+            className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md"
         >
-            <div className="relative h-36 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00292D]/12 via-[#D2C4FB]/12 to-[#AFF8C8]/14" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(255,238,180,0.35),transparent_45%)]" />
+            <div className="relative h-70 overflow-hidden">
+                <img src={post.image} className="w-full h-full object-cover" alt="" />
                 <div className="absolute left-5 top-5 inline-flex items-center rounded-full bg-[#FFEEB4] px-3 py-1 text-xs font-semibold text-[#00292D]">
                     {post.category}
                 </div>

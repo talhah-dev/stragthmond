@@ -37,7 +37,7 @@ export default function SiteNavbar() {
         <header className="sticky top-5 z-50 w-full">
             <div
                 className={[
-                    "mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300",
+                    "mx-auto px-2 sm:px-6 lg:px-8 transition-all duration-300",
                     scrolled ? "max-w-[1250px]" : "max-w-[1450px]",
                 ].join(" ")}
             >
@@ -51,7 +51,7 @@ export default function SiteNavbar() {
                 >
                     <div className="flex items-center gap-3 pl-4 sm:pl-5">
                         <Link href="/" className="flex items-center gap-2">
-                            <Image src={"/logo.png"} alt="logo" width={200} height={100} className="w-auto h-10" />
+                            <Image src={"/logo.png"} alt="logo" width={200} height={100} className="w-auto md:h-10 h-8" />
                         </Link>
                     </div>
 
@@ -99,14 +99,16 @@ export default function SiteNavbar() {
                                     side="right"
                                     className="w-[320px] border-l border-[#00292D]/10 bg-white/80 p-0 backdrop-blur-xl"
                                 >
-                                    <div className="p-6">
+                                    <div className="p-2">
                                         <SheetHeader>
-                                            <SheetTitle className="text-left text-sm font-semibold tracking-wide text-[#00292D]">
-                                                STRATHMOND
+                                            <SheetTitle className="">
+                                                <Link href="/" className="flex items-center">
+                                                    <Image src={"/logo.png"} alt="logo" width={200} height={100} className="w-auto md:h-10 h-8" />
+                                                </Link>
                                             </SheetTitle>
                                         </SheetHeader>
 
-                                        <div className="mt-6 space-y-2">
+                                        <div className="mt-6 space-y-2 px-2">
                                             {navLinks.map((l) => {
                                                 const active =
                                                     pathname === l.href || (l.href !== "/" && pathname?.startsWith(l.href));
@@ -115,7 +117,7 @@ export default function SiteNavbar() {
                                                         key={l.href}
                                                         href={l.href}
                                                         className={[
-                                                            "block rounded-2xl px-4 py-3 text-sm font-semibold transition",
+                                                            "block rounded-2xl px-4 py-3 font-semibold transition",
                                                             active
                                                                 ? "bg-[#00292D] text-[#F8F8FF]"
                                                                 : "text-[#00292D]/80 hover:bg-[#00292D]/5",
@@ -127,7 +129,7 @@ export default function SiteNavbar() {
                                             })}
                                         </div>
 
-                                        <div className="mt-6 rounded-3xl bg-[#F8F8FF] p-4 ring-1 ring-[#00292D]/10">
+                                        <div className="mt-6 mx-2 rounded-3xl bg-[#F8F8FF] p-4 ring-1 ring-[#00292D]/10">
                                             <div className="text-sm font-semibold text-[#00292D]">Need guidance?</div>
                                             <div className="mt-1 text-sm text-[#00292D]/65">
                                                 Get a curated shortlist based on your goal and budget.

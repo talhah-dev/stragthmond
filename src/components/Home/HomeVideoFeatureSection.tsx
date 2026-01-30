@@ -20,7 +20,7 @@ export default function HomeVideoFeatureSection() {
 
     return (
         <section className="bg-[#F8F8FF]">
-            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
                 <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
                     <div className="lg:col-span-7">
                         <div className="inline-flex items-center rounded-full bg-[#D2C4FB]/20 px-3 py-1 text-xs font-semibold text-[#00292D] ring-1 ring-[#00292D]/10">
@@ -39,7 +39,7 @@ export default function HomeVideoFeatureSection() {
                     <div className="lg:col-span-5">
                         <div className="space-y-6">
                             <div className="flex gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white ring-1 ring-[#00292D]/10">
+                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white ring-1 ring-[#00292D]/10">
                                     <MessageSquareText className="h-5 w-5 text-[#00292D]" />
                                 </div>
                                 <div>
@@ -51,7 +51,7 @@ export default function HomeVideoFeatureSection() {
                             </div>
 
                             <div className="flex gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white ring-1 ring-[#00292D]/10">
+                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white ring-1 ring-[#00292D]/10">
                                     <Zap className="h-5 w-5 text-[#00292D]" />
                                 </div>
                                 <div>

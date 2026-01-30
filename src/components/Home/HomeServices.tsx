@@ -9,11 +9,12 @@ type PropertyCardProps = {
     href: string;
     price: string;
     title: string;
+    image: string;
     location: string;
     tone?: "mint" | "yellow";
 };
 
-function PropertyCard({ href, price, title, location, tone = "mint" }: PropertyCardProps) {
+function PropertyCard({ image, href, price, title, location, tone = "mint" }: PropertyCardProps) {
     const pill =
         tone === "yellow"
             ? "bg-[#FFEEB4] text-[#00292D]"
@@ -26,7 +27,7 @@ function PropertyCard({ href, price, title, location, tone = "mint" }: PropertyC
         >
             <div className="relative h-74 w-full overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="w-full h-full object-cover rounded-xl" alt="" />
+                    <img src={image} className="w-full h-full object-cover rounded-xl" alt="" />
                 </div>
 
                 <div
@@ -47,7 +48,7 @@ function PropertyCard({ href, price, title, location, tone = "mint" }: PropertyC
 export default function HomeServices() {
     return (
         <section className="bg-[#F8F8FF]">
-            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-2xl">
                         <p className="text-sm font-medium text-[#00292D]/70">Explore</p>
@@ -72,6 +73,7 @@ export default function HomeServices() {
                 <div className="mt-10 grid gap-6 lg:grid-cols-4">
                     <div className="">
                         <PropertyCard
+                            image="https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D"
                             href="/buy"
                             price="$75,000"
                             title="House for sale at Dafros Residences"
@@ -81,6 +83,7 @@ export default function HomeServices() {
                     </div>
                     <div className="">
                         <PropertyCard
+                            image="https://images.unsplash.com/photo-1685514823717-7e1ff6ee0563?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fHw%3D"
                             href="/buy"
                             price="$75,000"
                             title="House for sale at Dafros Residences"
@@ -91,6 +94,7 @@ export default function HomeServices() {
 
                     <div className="">
                         <PropertyCard
+                            image="https://images.unsplash.com/photo-1733413788848-6f9e0c1c414c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHx8"
                             href="/buy"
                             price="$85,000"
                             title="House for sale at Fajar Indah"
@@ -101,6 +105,7 @@ export default function HomeServices() {
 
                     <div className="">
                         <PropertyCard
+                            image="https://images.unsplash.com/photo-1686164748506-4311ba437c24?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8"
                             href="/rent"
                             price="$55,000"
                             title="Perumahan Griya Sakinah"
@@ -111,6 +116,7 @@ export default function HomeServices() {
 
                     <div className="">
                         <PropertyCard
+                            image="https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI0fHx8ZW58MHx8fHx8"
                             href="/rent"
                             price="$75,000"
                             title="House for sale at Palm View Residence"
@@ -121,6 +127,7 @@ export default function HomeServices() {
 
                     <div className="">
                         <PropertyCard
+                            image="https://images.unsplash.com/photo-1748063578185-3d68121b11ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDMxfHx8ZW58MHx8fHx8"
                             href="/buy"
                             price="$62,000"
                             title="Land for sale area"
@@ -131,6 +138,7 @@ export default function HomeServices() {
 
                     <div className="">
                         <PropertyCard
+                            image="https://images.unsplash.com/photo-1733413788252-e83ecab5ea75?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDU0fHx8ZW58MHx8fHx8"
                             href="/buy"
                             price="$62,000"
                             title="Land for sale area"
@@ -141,6 +149,7 @@ export default function HomeServices() {
 
                     <div className="">
                         <PropertyCard
+                            image="https://plus.unsplash.com/premium_photo-1733342586521-6d04831831bd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDY3fHx8ZW58MHx8fHx8"
                             href="/buy"
                             price="$90,000"
                             title="Land for sale near"

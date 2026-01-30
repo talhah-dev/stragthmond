@@ -1,3 +1,4 @@
+import SiteFooter from '@/components/Footer'
 import HomeAboutQuote from '@/components/Home/HomeAboutQuote'
 import HomeCommunities from '@/components/Home/HomeCommunities'
 import HomeFeaturedProperties from '@/components/Home/HomeFeaturedProperties'
@@ -50,12 +51,13 @@ export default function HomePg() {
                 </div>
             </section> */}
             <HomeServices />
-            <HomeTimeline />
             <HomeVideoFeatureSection />
+            <HomeTimeline />
             <HomeFeaturedProperties />
             <HomeCommunities />
-            <HomeWhyStrathmond />
+            {/* <HomeWhyStrathmond /> */}
             <HomeNewsInsights />
+            <SiteFooter />
         </div>
     )
 }
