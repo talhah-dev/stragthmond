@@ -57,8 +57,8 @@ function FilterChip({
 export default function HomeLanding() {
     return (
         <main className="min-h-screen bg-gradient-to-b from-[#F8F8FF]/25 via-[#F8F8FF] to-[#F8F8FF]">
-            <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-                <h1 className="text-balance text-3xl font-semibold tracking-tight text-[#00292D] sm:text-4xl">
+            <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-6 lg:px-8 lg:pb-14">
+                <h1 className="text-balance text-3xl font-medium tracking-tight text-[#00292D]/85 sm:text-4xl">
                     Real estate for living and investments
                 </h1>
 
