@@ -23,12 +23,12 @@ export default function HomeAboutQuote() {
                                     Built on honesty, clarity, and a deep respect for your goals.
                                 </h2>
                                 <div className="mt-10 text-sm flex md:flex-row flex-col gap-5 justify-between leading-relaxed text-[#00292D]/70">
-                                    <p className="max-w-lg">
+                                    <p className="md:max-w-lg">
                                         In a market full of noise, Strathmond focuses on a premium, structured experience—
                                         curated shortlists, transparent advice, and a clear process for buying, renting, selling,
                                         and off-plan opportunities.
                                     </p>
-                                    <img data-aos="zoom-in-up" src="https://images.unsplash.com/photo-1738168246881-40f35f8aba0a?q=80&w=1228&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="rounded-2xl max-w-80" alt="" />
+                                    <img data-aos="zoom-in-up" src="https://images.unsplash.com/photo-1738168246881-40f35f8aba0a?q=80&w=1228&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="rounded-2xl md:max-w-80 w-full" alt="" />
                                 </div>
                             </div>
                         </div>

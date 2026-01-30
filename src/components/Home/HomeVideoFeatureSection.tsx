@@ -71,7 +71,7 @@ export default function HomeVideoFeatureSection() {
 
                 <div
                     data-aos="zoom-in-up"
-                    className="mt-12 overflow-hidden rounded-[28px] bg-white ring-1 ring-[#00292D]/10"
+                    className="mt-12 overflow-hidden md:rounded-[28px] rounded-xl bg-white ring-1 ring-[#00292D]/10"
                 >
                     <div className="relative">
                         <video

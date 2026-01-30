@@ -117,7 +117,7 @@ export default function HomeServices() {
 
                     <div className="" data-aos="fade-up">
                         <PropertyCard
-                            image="https://plus.unsplash.com/premium_photo-1661954372617-15780178eb2e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI0fHx8ZW58MHx8fHx8"
+                            image="https://images.unsplash.com/photo-1706808849780-7a04fbac83ef?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                             href="/rent"
                             price="$75,000"
                             title="House for sale at Palm View Residence"
