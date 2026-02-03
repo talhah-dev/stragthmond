@@ -34,7 +34,7 @@ export default function SiteNavbar() {
     }, [pathname]);
 
     return (
-        <header data-aos="fade-down" className="sticky top-5 z-50 w-full">
+        <header data-aos="fade-down" className="sticky top-3 z-50 w-full">
             <div
                 className={[
                     "mx-auto px-2 sm:px-6 lg:px-8 transition-all duration-300",
@@ -43,7 +43,7 @@ export default function SiteNavbar() {
             >
                 <div
                     className={[
-                        "mt-3 flex h-16 md:h-20 items-center justify-between gap-4 rounded-full transition-all duration-300",
+                        " flex h-16 md:h-20 items-center justify-between gap-4 rounded-full transition-all duration-300",
                         scrolled
                             ? "bg-white/70 backdrop-blur-xl shadow-sm ring-1 ring-[#00292D]/10"
                             : "bg-transparent",
@@ -78,9 +78,11 @@ export default function SiteNavbar() {
 
                     <div className="flex items-center gap-2 pr-3 sm:pr-4">
                         <div className="hidden lg:block">
-                            <Button className="rounded-full bg-[#FFEEB4] text-[#00292D] h-12 px-8 hover:bg-[#FFEEB4]/90">
-                                <Link href="/contact">Get shortlist</Link>
-                            </Button>
+                            <Link href="/contact" className="cursor-pointer">
+                                <Button className="rounded-full bg-[#FFEEB4] text-[#00292D] h-12 px-8 hover:bg-[#FFEEB4]/90">
+                                    Get shortlist
+                                </Button>
+                            </Link>
                         </div>
 
                         <div className="lg:hidden">

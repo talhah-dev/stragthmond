@@ -1,6 +1,7 @@
 "use client";
 
 import SiteFooter from '@/components/Footer'
+import Home2 from '@/components/Home/Home2';
 import HomeAboutQuote from '@/components/Home/HomeAboutQuote'
 import HomeCommunities from '@/components/Home/HomeCommunities'
 import HomeFeaturedProperties from '@/components/Home/HomeFeaturedProperties'
@@ -24,7 +25,8 @@ export default function HomePg() {
     return (
         <div>
             <SiteNavbar />
-            <HomeHero />
+            {/* <HomeHero /> */}
+            <Home2 />
             {/* <HomeLogoMarquee /> */}
             <HomeAboutQuote />
             {/* <section className="bg-[#F8F8FF]">
