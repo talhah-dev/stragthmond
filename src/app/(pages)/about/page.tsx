@@ -197,7 +197,7 @@ export default function About() {
                         </div>
                     </div>
 
-                    <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="mt-8 grid md:gap-5 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                         <ValueCard
                             icon={ShieldCheck}
                             title="Trust-led guidance"

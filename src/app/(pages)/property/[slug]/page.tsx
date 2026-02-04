@@ -238,7 +238,7 @@ export default function PropertyDetailsPage() {
                                 <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#F8F8FF] p-1 ring-1 ring-[#00292D]/10">
                                     <input
                                         placeholder="Your email"
-                                        className="pl-4 flex-1 border-0 bg-transparent text-[#00292D] placeholder:text-[#00292D]/45 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                        className="pl-4 flex-1 border-0 bg-transparent text-[#00292D] placeholder:text-[#00292D]/45 outline-none"
                                     />
                                     <Button className="h-11 rounded-xl bg-[#00292D] px-6 text-[#F8F8FF] hover:bg-[#00292D]/90">
                                         Send
