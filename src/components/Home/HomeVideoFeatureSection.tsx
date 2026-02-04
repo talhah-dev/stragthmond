@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MessageSquareText, Zap, Play } from "lucide-react";
+import Link from "next/link";
 
 export default function HomeVideoFeatureSection() {
     const videoRef = React.useRef<HTMLVideoElement | null>(null);
@@ -62,9 +63,11 @@ export default function HomeVideoFeatureSection() {
                                 </div>
                             </div>
 
-                            <Button data-aos="fade-up" className="w-fit rounded-full bg-[#00292D] px-6 text-[#F8F8FF] hover:bg-[#00292D]/90">
-                                Explore Strathmond
-                            </Button>
+                            <Link href={"/about"}>
+                                <Button data-aos="fade-up" className="w-fit rounded-full bg-[#00292D] px-6 text-[#F8F8FF] hover:bg-[#00292D]/90">
+                                    Explore Strathmond
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>

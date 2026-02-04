@@ -125,9 +125,6 @@ export default function HomeCommunities() {
                     </div>
 
                     <div data-aos="fade-up" className="flex flex-wrap gap-2">
-                        <Button asChild variant="outline" className="border-[#00292D]/15 bg-transparent">
-                            <Link href="/communities">View all communities</Link>
-                        </Button>
                         <Button asChild className="bg-[#00292D] text-[#F8F8FF] hover:bg-[#00292D]/90">
                             <Link href="/contact">Get recommendations</Link>
                         </Button>

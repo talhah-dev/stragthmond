@@ -136,7 +136,7 @@ const listings: Listing[] = [
 function ListingCard({ item, index, }: { item: Listing, index: number }) {
     return (
         <Link
-            href={item.href} data-aos="fade-up" data-aos-delay={index * 150}
+            href={"/property/1"} data-aos="fade-up" data-aos-delay={index * 150}
             className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md"
         >
             <div className="relative aspect-[16/14] w-full overflow-hidden">
@@ -233,7 +233,7 @@ export default function HomeFeaturedProperties() {
                         </div>
 
                         <Button asChild className="bg-[#00292D] text-[#F8F8FF] hover:bg-[#00292D]/90">
-                            <Link href={active === "Buy" ? "/buy" : active === "Rent" ? "/rent" : "/off-plan"}>
+                            <Link href={active === "Buy" ? "/buy/properties-for-sale" : active === "Rent" ? "/rent/properties-for-rent" : "/off-plan/latest-off-plan-projects"}>
                                 View all
                             </Link>
                         </Button>

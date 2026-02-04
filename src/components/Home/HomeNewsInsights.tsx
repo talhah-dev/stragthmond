@@ -130,7 +130,7 @@ export default function HomeNewsInsights() {
                             variant="outline"
                             className="border-[#F8F8FF]/25 bg-transparent text-[#F8F8FF] hover:bg-[#F8F8FF]/10 hover:text-[#F8F8FF]"
                         >
-                            <Link href="/news">View all articles</Link>
+                            <Link href="/blog">View all articles</Link>
                         </Button>
                         <Button asChild className="bg-[#FFEEB4] text-[#00292D] hover:bg-[#FFEEB4]/90">
                             <Link href="/contact">Get a shortlist</Link>
