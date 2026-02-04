@@ -2,25 +2,85 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
-const navLinks = [
-    { href: "/buy", label: "Buy" },
-    { href: "/rent", label: "Rent" },
-    { href: "/sell", label: "Sell" },
-    { href: "/off-plan", label: "Off Plan" },
-    { href: "/about", label: "About" },
-    { href: "/news", label: "News & Insights" },
+type NavItem =
+    | {
+        type: "link";
+        href: string;
+        label: string;
+    }
+    | {
+        type: "dropdown";
+        label: string;
+        items: { href: string; label: string }[];
+    };
+
+const navItems: NavItem[] = [
+    {
+        type: "dropdown",
+        label: "Buy Property",
+        items: [
+            { href: "/buy/properties-for-sale", label: "Properties for Sale" },
+            { href: "/buy/why-buy-with-white-co", label: "Why Buy with White & Co." },
+        ],
+    },
+    {
+        type: "dropdown",
+        label: "Rent Property",
+        items: [
+            { href: "/rent/properties-for-rent", label: "Properties for Rent" },
+            { href: "/rent/why-rent-with-white-co", label: "Why Rent with White & Co." },
+        ],
+    },
+    {
+        type: "dropdown",
+        label: "Off Plan Projects",
+        items: [
+            { href: "/off-plan/latest-off-plan-projects", label: "Latest Off Plan Projects" },
+            { href: "/off-plan/why-white-co-off-plan", label: "Why Choose White & Co. for Off Plan" },
+        ],
+    },
+    { type: "link", href: "/about", label: "About" },
+    { type: "link", href: "/team", label: "Meet The Team" },
+    { type: "link", href: "/careers", label: "Careers" },
 ];
+
+function isActive(pathname: string | null, href: string) {
+    if (!pathname) return false;
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
+}
+
+function isDropdownActive(pathname: string | null, items: { href: string; label: string }[]) {
+    if (!pathname) return false;
+    return items.some((it) => pathname === it.href || pathname.startsWith(it.href + "/"));
+}
 
 export default function SiteNavbar() {
     const pathname = usePathname();
     const [scrolled, setScrolled] = React.useState(false);
     const [open, setOpen] = React.useState(false);
+    const [mobileOpenKey, setMobileOpenKey] = React.useState<string | null>(null);
 
     React.useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 12);
@@ -31,6 +91,7 @@ export default function SiteNavbar() {
 
     React.useEffect(() => {
         setOpen(false);
+        setMobileOpenKey(null);
     }, [pathname]);
 
     return (
@@ -38,43 +99,95 @@ export default function SiteNavbar() {
             <div
                 className={[
                     "mx-auto px-2 sm:px-6 lg:px-8 transition-all duration-300",
-                    scrolled ? "max-w-[1250px]" : "max-w-[1450px]",
+                    scrolled ? "max-w-[1300px]" : "max-w-[1450px]",
                 ].join(" ")}
             >
                 <div
                     className={[
-                        " flex h-16 md:h-20 items-center justify-between gap-4 rounded-full transition-all duration-300",
-                        scrolled
-                            ? "bg-white/70 backdrop-blur-xl shadow-sm ring-1 ring-[#00292D]/10"
-                            : "bg-transparent",
+                        "flex h-16 md:h-20 items-center justify-between gap-4 rounded-full transition-all duration-300",
+                        scrolled ? "bg-white/70 backdrop-blur-xl shadow-sm ring-1 ring-[#00292D]/10" : "bg-transparent",
                     ].join(" ")}
                 >
                     <div className="flex items-center gap-3 pl-4 sm:pl-5">
                         <Link href="/" className="flex items-center gap-2">
-                            <Image src={"/logo.png"} alt="logo" width={200} height={100} className="w-auto md:h-10 h-8" />
+                            <Image src="/logo.png" alt="logo" width={200} height={100} className="w-auto md:h-10 h-8" />
                         </Link>
                     </div>
 
-                    <nav className="hidden items-center gap-1 lg:flex">
-                        {navLinks.map((l) => {
-                            const active =
-                                pathname === l.href || (l.href !== "/" && pathname?.startsWith(l.href));
-                            return (
-                                <Link
-                                    key={l.href}
-                                    href={l.href}
-                                    className={[
-                                        "rounded-full px-4 py-2 font-semibold transition",
-                                        active
-                                            ? "bg-[#00292D] text-[#F8F8FF]"
-                                            : "text-[#00292D]/70 hover:bg-[#00292D]/5 hover:text-[#00292D]",
-                                    ].join(" ")}
-                                >
-                                    {l.label}
-                                </Link>
-                            );
-                        })}
+                    <nav className="hidden lg:flex items-center">
+                        <NavigationMenu>
+                            <NavigationMenuList className="gap-1">
+                                {navItems.map((item) => {
+                                    if (item.type === "link") {
+                                        const active = isActive(pathname, item.href);
+                                        return (
+                                            <NavigationMenuItem key={item.href}>
+                                                <NavigationMenuLink asChild>
+                                                    <Link
+                                                        href={item.href}
+                                                        className={[
+                                                            "rounded-full px-4 py-2 font-semibold transition",
+                                                            active
+                                                                ? "bg-[#00292D] text-[#F8F8FF]"
+                                                                : "text-[#00292D]/70 hover:bg-[#00292D]/5 hover:text-[#00292D]",
+                                                        ].join(" ")}
+                                                    >
+                                                        {item.label}
+                                                    </Link>
+                                                </NavigationMenuLink>
+                                            </NavigationMenuItem>
+                                        );
+                                    }
+
+                                    const active = isDropdownActive(pathname, item.items);
+
+                                    return (
+                                        <NavigationMenuItem key={item.label}>
+                                            <NavigationMenuTrigger
+                                                className={[
+                                                    "rounded-full px-4 py-2 font-semibold transition bg-transparent",
+                                                    active
+                                                        ? "bg-[#00292D] text-[#F8F8FF] hover:bg-[#00292D] hover:text-[#F8F8FF] data-[state=open]:bg-[#00292D] data-[state=open]:text-[#F8F8FF]"
+                                                        : "text-[#00292D]/70 hover:bg-[#00292D]/5 hover:text-[#00292D] data-[state=open]:bg-[#00292D]/5 data-[state=open]:text-[#00292D]",
+                                                ].join(" ")}
+                                            >
+                                                <span className="flex items-center gap-2">
+                                                    {item.label}
+                                                </span>
+                                            </NavigationMenuTrigger>
+
+                                            <NavigationMenuContent>
+                                                <div className="w-[360px]">
+                                                    <div className=" overflow-hidden">
+                                                        <div className="p-2">
+                                                            {item.items.map((sub) => {
+                                                                const subActive = isActive(pathname, sub.href);
+                                                                return (
+                                                                    <Link
+                                                                        key={sub.href}
+                                                                        href={sub.href}
+                                                                        className={[
+                                                                            "block rounded-2xl px-4 py-3 font-semibold transition",
+                                                                            subActive
+                                                                                ? "bg-[#00292D] text-[#F8F8FF]"
+                                                                                : "text-[#00292D]/80 hover:bg-[#00292D]/5",
+                                                                        ].join(" ")}
+                                                                    >
+                                                                        {sub.label}
+                                                                    </Link>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </NavigationMenuContent>
+                                        </NavigationMenuItem>
+                                    );
+                                })}
+                            </NavigationMenuList>
+                        </NavigationMenu>
                     </nav>
+
 
                     <div className="flex items-center gap-2 pr-3 sm:pr-4">
                         <div className="hidden lg:block">
@@ -103,30 +216,74 @@ export default function SiteNavbar() {
                                 >
                                     <div className="p-2">
                                         <SheetHeader>
-                                            <SheetTitle className="">
+                                            <SheetTitle>
                                                 <Link href="/" className="flex items-center">
-                                                    <Image src={"/logo.png"} alt="logo" width={200} height={100} className="w-auto md:h-10 h-8" />
+                                                    <Image src="/logo.png" alt="logo" width={200} height={100} className="w-auto md:h-10 h-8" />
                                                 </Link>
                                             </SheetTitle>
                                         </SheetHeader>
 
                                         <div className="mt-6 space-y-2 px-2">
-                                            {navLinks.map((l) => {
-                                                const active =
-                                                    pathname === l.href || (l.href !== "/" && pathname?.startsWith(l.href));
+                                            {navItems.map((item) => {
+                                                if (item.type === "link") {
+                                                    const active = isActive(pathname, item.href);
+                                                    return (
+                                                        <Link
+                                                            key={item.href}
+                                                            href={item.href}
+                                                            className={[
+                                                                "block rounded-2xl px-4 py-3 font-semibold transition",
+                                                                active ? "bg-[#00292D] text-[#F8F8FF]" : "text-[#00292D]/80 hover:bg-[#00292D]/5",
+                                                            ].join(" ")}
+                                                        >
+                                                            {item.label}
+                                                        </Link>
+                                                    );
+                                                }
+
+                                                const expanded = mobileOpenKey === item.label;
+                                                const active = isDropdownActive(pathname, item.items);
+
                                                 return (
-                                                    <Link
-                                                        key={l.href}
-                                                        href={l.href}
-                                                        className={[
-                                                            "block rounded-2xl px-4 py-3 font-semibold transition",
-                                                            active
-                                                                ? "bg-[#00292D] text-[#F8F8FF]"
-                                                                : "text-[#00292D]/80 hover:bg-[#00292D]/5",
-                                                        ].join(" ")}
+                                                    <Collapsible
+                                                        key={item.label}
+                                                        open={expanded}
+                                                        onOpenChange={(v) => setMobileOpenKey(v ? item.label : null)}
                                                     >
-                                                        {l.label}
-                                                    </Link>
+                                                        <CollapsibleTrigger
+                                                            className={[
+                                                                "w-full flex items-center justify-between rounded-2xl px-4 py-3 font-semibold transition",
+                                                                active
+                                                                    ? "bg-[#00292D] text-[#F8F8FF]"
+                                                                    : "text-[#00292D]/80 hover:bg-[#00292D]/5",
+                                                            ].join(" ")}
+                                                        >
+                                                            <span>{item.label}</span>
+                                                            <ChevronDown className={["h-4 w-4 transition-transform duration-200", expanded ? "rotate-180" : ""].join(" ")} />
+                                                        </CollapsibleTrigger>
+
+                                                        <CollapsibleContent className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-top-1 data-[state=open]:slide-in-from-top-1 overflow-hidden">
+                                                            <div className="mt-2 space-y-2 pl-2">
+                                                                {item.items.map((sub) => {
+                                                                    const subActive = isActive(pathname, sub.href);
+                                                                    return (
+                                                                        <Link
+                                                                            key={sub.href}
+                                                                            href={sub.href}
+                                                                            className={[
+                                                                                "block rounded-2xl px-4 py-3 font-semibold transition",
+                                                                                subActive
+                                                                                    ? "bg-[#00292D] text-[#F8F8FF]"
+                                                                                    : "text-[#00292D]/80 hover:bg-[#00292D]/5",
+                                                                            ].join(" ")}
+                                                                        >
+                                                                            {sub.label}
+                                                                        </Link>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </CollapsibleContent>
+                                                    </Collapsible>
                                                 );
                                             })}
                                         </div>

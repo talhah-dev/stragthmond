@@ -1,42 +1,24 @@
-import React from "react";
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
 import { Mail, MapPin, Phone, ArrowRight } from "lucide-react";
-import Image from "next/image";
 import UserWrapper from "@/app/(wrapper)/UserWrapper";
+import HeroSections from "@/components/HeroSections";
 
 export default function ContactPage() {
     return (
         <UserWrapper>
-            <main className="bg-[#F8F8FF] md:px-5 px-3 rounded-xl pt-3 overflow-hidden">
-                <section className="relative  md:h-[500px] h-70 w-full rounded-xl overflow-hidden">
-                    <video
-                        className="absolute inset-0 h-full w-full object-cover"
-                        src="https://www.pexels.com/download/video/17224771/"
-                        autoPlay
-                        loop
-                        poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                        muted
-                        playsInline
-                    />
+            <main className="bg-[#F8F8FF] overflow-hidden md:px-5 px-3 rounded-xl pt-3">
 
-                    <div className="absolute inset-0 bg-black/35" />
-
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center px-4">
-                            <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                                Contact Us
-                            </h1>
-                            <p className="mt-3 text-sm text-white/80 sm:text-base">
-                                We’ll get back with a curated shortlist and clear next steps.
-                            </p>
-                        </div>
-                    </div>
-                </section>
+                <HeroSections
+                    video="https://www.pexels.com/download/video/17224771/"
+                    poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
+                    heading="Contact Us"
+                    subheading="We’ll get back with a curated shortlist and clear next steps."
+                />
 
                 <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-28">
                     <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-                        <div className="lg:col-span-6">
+                        <div data-aos="fade-up" className="lg:col-span-6">
                             <div className="text-xs font-semibold tracking-widest text-[#00292D]/55">
                                 CONTACT
                             </div>
@@ -113,7 +95,7 @@ export default function ContactPage() {
                             </div>
                         </div>
 
-                        <div className="lg:col-span-6">
+                        <div data-aos="fade-up" data-aos-delay="200" className="lg:col-span-6">
                             <div className="overflow-hidden rounded-xl bg-white ring-1 ring-[#00292D]/10">
                                 <div className="p-6 sm:p-8">
                                     <div className="text-sm font-semibold text-[#00292D]">Request a shortlist</div>
@@ -129,7 +111,7 @@ export default function ContactPage() {
                     </div>
                     <section className="bg-[#F8F8FF]">
                         <div className="mx-auto max-w-7xl pt-14 md:pt-28">
-                            <div className="mb-6">
+                            <div data-aos="fade-up" className="mb-6">
                                 <p className="text-xs font-semibold tracking-widest text-[#00292D]/55">
                                     LOCATION
                                 </p>
@@ -141,7 +123,7 @@ export default function ContactPage() {
                                 </p>
                             </div>
 
-                            <div className="overflow-hidden rounded-lg ring-1 ring-[#00292D]/10">
+                            <div data-aos="zoom-out-up" className="overflow-hidden rounded-lg ring-1 ring-[#00292D]/10">
                                 <div className="relative h-[420px] w-full">
                                     <iframe
                                         title="Strathmond Dubai Location"
