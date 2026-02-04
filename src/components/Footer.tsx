@@ -9,16 +9,16 @@ import Image from "next/image";
 
 const footerLinks = {
     explore: [
-        { label: "Communities", href: "/communities" },
-        { label: "Search", href: "/buy" },
-        { label: "House", href: "/buy?type=house" },
-        { label: "Apartment", href: "/buy?type=apartment" },
-        { label: "Land", href: "/buy?type=land" },
+        { label: "Property for sale", href: "/buy/properties-for-sale" },
+        { label: "Property for rent", href: "/rent/properties-for-rent" },
+        { label: "Latest off plan projects", href: "/off-plan/latest-off-plan-projects" },
+        { label: "Buy property", href: "/buy/buy-property" },
+        { label: "Rent property", href: "/rent/rent-property" },
     ],
     company: [
         { label: "About", href: "/about" },
         { label: "Careers", href: "/careers" },
-        { label: "Blog", href: "/news" },
+        { label: "Blog", href: "/blog" },
         { label: "Contact", href: "/contact" },
     ],
 };
