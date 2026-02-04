@@ -81,7 +81,7 @@ export default function About() {
                     subheading="A premium Dubai real estate experience—curated listings, honest context, and a structured process for confident decisions."
                 />
 
-                <section className="relative  mt-10">
+                <section className="relative  md:mt-10">
                     <div className="pointer-events-none absolute inset-0">
                         <div className="absolute -top-40 left-[-10%] h-[520px] w-[520px] rounded-full bg-[#AFF8C8]/22 blur-3xl" />
                         <div className="absolute -bottom-56 right-[-10%] h-[620px] w-[620px] rounded-full bg-[#D2C4FB]/18 blur-3xl" />
