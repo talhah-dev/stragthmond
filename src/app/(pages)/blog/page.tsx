@@ -26,17 +26,6 @@ type BlogPost = {
 
 const posts: BlogPost[] = [
     {
-        slug: "buy-property-dubai-guide",
-        title: "Buying Property in Dubai: A Clear 2026 Guide",
-        excerpt:
-            "From budgets and communities to fees and timelines—everything you need to know before buying property in Dubai.",
-        category: "Buying",
-        date: "Feb 02, 2026",
-        readTime: "6 min read",
-        image: "/imageshttps://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D1.jpg",
-        featured: true,
-    },
-    {
         slug: "renting-dubai-mistakes",
         title: "7 Common Renting Mistakes in Dubai (and How to Avoid Them)",
         excerpt:
@@ -148,49 +137,6 @@ export default function BlogPage() {
                         </Button>
                     </div>
                 </section>
-
-                {/* FEATURED */}
-                {featured && (
-                    <section data-aos="fade-up" data-aos-delay="200" className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
-                        <Link
-                            href={`/blog/${featured.slug}`}
-                            className="group grid gap-6 overflow-hidden rounded-2xl bg-white ring-1 ring-[#00292D]/10 lg:grid-cols-12"
-                        >
-                            <div className="relative aspect-[16/10] lg:col-span-7">
-                                <Image
-                                    src={"https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-                                    alt={featured.title}
-                                    fill
-                                    className="object-cover transition duration-500"
-                                    sizes="(max-width: 1024px) 100vw, 60vw"
-                                />
-                            </div>
-
-                            <div className="p-8 lg:col-span-5">
-                                <Badge className="rounded-full bg-[#FFEEB4] text-[#00292D]">
-                                    Featured
-                                </Badge>
-
-                                <h2 className="mt-4 text-2xl font-semibold text-[#00292D] sm:text-3xl">
-                                    {featured.title}
-                                </h2>
-
-                                <p className="mt-3 text-sm leading-relaxed text-[#00292D]/70">
-                                    {featured.excerpt}
-                                </p>
-
-                                <div className="mt-4 flex items-center gap-4 text-xs text-[#00292D]/60">
-                                    <span>{featured.date}</span>
-                                    <span>{featured.readTime}</span>
-                                </div>
-
-                                <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#00292D]">
-                                    Read full article <ArrowRight className="h-4 w-4" />
-                                </div>
-                            </div>
-                        </Link>
-                    </section>
-                )}
 
                 {/* GRID */}
                 <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
