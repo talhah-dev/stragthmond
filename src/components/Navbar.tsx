@@ -60,6 +60,14 @@ const navItems: NavItem[] = [
             { href: "/off-plan/off-plan-properties", label: "Why Choose for offset plan" },
         ],
     },
+    {
+        type: "dropdown",
+        label: "Sell Property",
+        items: [
+            { href: "/sell/sell-property", label: "Sell your property" },
+            { href: "/sell/why-sell-property", label: "Why sell property" },
+        ],
+    },
     { type: "link", href: "/about", label: "About" },
     { type: "link", href: "/team", label: "Meet The Team" },
     { type: "link", href: "/careers", label: "Careers" },
@@ -97,7 +105,7 @@ export default function SiteNavbar() {
             <div
                 className={[
                     "mx-auto px-2 sm:px-6 lg:px-8 transition-all duration-300",
-                    scrolled ? "max-w-[1300px]" : "max-w-[1450px]",
+                    scrolled ? "max-w-[1350px]" : "max-w-[1450px]",
                 ].join(" ")}
             >
                 <div
