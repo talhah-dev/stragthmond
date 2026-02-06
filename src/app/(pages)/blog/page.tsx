@@ -91,13 +91,6 @@ export default function BlogPage() {
     return (
         <UserWrapper>
             <main className="bg-[#F8F8FF]">
-                {
-                    isLoading && (
-                        <div className="flex items-center justify-center p-20"><Spinner /></div >
-                    )
-                }
-
-
 
                 {/* HERO */}
                 <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
@@ -127,10 +120,8 @@ export default function BlogPage() {
                 </section>
 
                 {
-                    data.length === 0 && (
-                        <div className="flex items-center justify-center p-20 text-zinc-600">
-                            No blogs avaliabe at the moment
-                        </div>
+                    isLoading && (
+                        <div className="flex items-center justify-center p-20"><Spinner /></div >
                     )
                 }
 
