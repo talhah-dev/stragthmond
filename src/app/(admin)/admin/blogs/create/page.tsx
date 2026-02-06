@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -14,96 +14,117 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft, FileText, UploadCloud } from "lucide-react";
+import { ArrowLeft, FileText, UploadCloud, Loader2 } from "lucide-react";
+import type { Blog } from "@/types/blog";
+import { upload } from "@vercel/blob/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createBlog } from "@/lib/api/blogs";
+import { toast } from "sonner";
+import { Spinner } from "@/components/ui/spinner";
+import { BlobStorage } from "@/components/admin/BlobStorage";
 
-type BlogForm = {
-    title: string;
-    slug: string;
-    category: string;
-    excerpt: string;
-    authorName: string;
-    authorRole: string;
-    content: string;
-    coverFile: File | null;
-};
-
-const existingSlugs = [
-    "renting-dubai-mistakes",
-    "buy-property-dubai-guide",
-    "off-plan-investment",
-];
-
-const initialState: BlogForm = {
-    title: "",
-    slug: "",
-    category: "Insights",
-    excerpt: "",
-    authorName: "Strathmond Insights",
-    authorRole: "Market & Research",
-    content: "",
-    coverFile: null,
-};
-
-function slugify(input: string) {
-    return input
+function toSlug(value: string) {
+    return value
         .toLowerCase()
         .trim()
         .replace(/['"]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .slice(0, 80);
-}
-
-function uniqueSlug(base: string, used: Set<string>) {
-    if (!base) return "";
-    if (!used.has(base)) return base;
-    let i = 2;
-    while (used.has(`${base}-${i}`)) i += 1;
-    return `${base}-${i}`;
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
 }
 
 export default function CreateBlogPage() {
-    const [form, setForm] = React.useState<BlogForm>(initialState);
-    const [coverPreview, setCoverPreview] = React.useState<string>("");
+    const [title, setTitle] = useState("");
+    const [slug, setSlug] = useState("");
+    const [category, setCategory] = useState("");
+    const [excerpt, setExcerpt] = useState("");
+    const [content, setContent] = useState("");
+    const [coverImage, setCoverImage] = useState<string>("");
+    const [activeStatus, setActiveStatus] = useState<Blog["status"] | null>(null);
+    const [coverFileName, setCoverFileName] = useState("");
+    const [isUploading, setIsUploading] = useState(false);
 
-    const usedSlugs = React.useMemo(() => new Set(existingSlugs), []);
+    const autoSlug = useMemo(() => toSlug(title), [title]);
 
-    const update = (key: keyof BlogForm, value: string) => {
-        setForm((p) => ({ ...p, [key]: value }));
-    };
+    useEffect(() => {
+        setSlug(autoSlug);
+    }, [autoSlug]);
 
-    const onTitleChange = (v: string) => {
-        const base = slugify(v);
-        const slug = uniqueSlug(base, usedSlugs);
-        setForm((p) => ({ ...p, title: v, slug }));
-    };
+    const queryClient = useQueryClient();
 
-    const onCoverChange = (file: File | null) => {
-        setForm((p) => ({ ...p, coverFile: file }));
-        if (coverPreview) URL.revokeObjectURL(coverPreview);
-        if (!file) {
-            setCoverPreview("");
-            return;
+    const { mutate: mutateCreateBlog, isPending: isCreating } = useMutation({
+        mutationFn: async (payload: Blog) => {
+            return createBlog(payload);
+        },
+        onSuccess: (data: any) => {
+            setActiveStatus(null);
+            setTitle("");
+            setSlug("");
+            setCategory("");
+            setExcerpt("");
+            setContent("");
+            setCoverImage("");
+            setCoverFileName("");
+            toast.success(data?.message || "Blog created successfully");
+            queryClient.invalidateQueries({ queryKey: ["blogs"] });
+        },
+        onError: (err: any) => {
+            setActiveStatus(null);
+            toast.error(err?.message || "Unauthorized access");
+        },
+    });
+
+    const onPickCover = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setIsUploading(true);
+
+        const fileType = file.name.split(".").pop();
+        const base = file.name.replace(/\.[^/.]+$/, "");
+        const uniqueName = `${base}-${crypto.randomUUID()}.${fileType}`;
+
+        try {
+            const blob = await upload(uniqueName, file, {
+                access: "public",
+                handleUploadUrl: "/api/upload",
+            });
+            
+            setCoverImage(blob.url);
+            setCoverFileName(file.name);
+            queryClient.invalidateQueries({ queryKey: ["blob-usage"] });
+        } catch (err: any) {
+            toast.error(err?.message || "Image upload failed");
+        } finally {
+            setIsUploading(false);
+            e.target.value = "";
         }
-        setCoverPreview(URL.createObjectURL(file));
     };
 
-    const submit = (status: "draft" | "published") => {
-        const payload = {
-            status,
-            title: form.title,
-            slug: form.slug,
-            category: form.category,
-            excerpt: form.excerpt,
-            authorName: form.authorName,
-            authorRole: form.authorRole,
-            content: form.content,
-            coverFile: form.coverFile
-                ? { name: form.coverFile.name, type: form.coverFile.type, size: form.coverFile.size }
-                : null,
+    const submit = (nextStatus: Blog["status"]) => {
+        setActiveStatus(nextStatus);
+
+        const payload: Blog = {
+            status: nextStatus,
+            title: title.trim(),
+            slug: slug.trim(),
+            category,
+            excerpt: excerpt.trim(),
+            content: content.trim(),
+            coverImage,
         };
-        console.log("BLOG SUBMIT:", payload);
+
+        mutateCreateBlog(payload);
     };
+
+    const isDisabled =
+        isUploading ||
+        isCreating ||
+        !title.trim() ||
+        !category ||
+        !excerpt.trim() ||
+        !content.trim() ||
+        !coverImage;
 
     return (
         <div className="min-h-screen bg-[#F8F8FF] px-6 py-8">
@@ -140,23 +161,28 @@ export default function CreateBlogPage() {
                             <div className="space-y-2">
                                 <Label className="text-sm font-semibold text-[#00292D]">Title</Label>
                                 <Input
-                                    value={form.title}
-                                    onChange={(e) => onTitleChange(e.target.value)}
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
                                     placeholder="e.g. Buying Property in Dubai: A Clear 2026 Guide"
                                     className="h-11 border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
                                     required
+                                    disabled={isUploading || isCreating}
                                 />
                                 <div className="text-xs font-medium text-[#00292D]/60">
                                     Slug:{" "}
                                     <span className="font-semibold text-[#00292D]">
-                                        {form.slug || "auto-generated-from-title"}
+                                        {slug || "auto-generated-from-title"}
                                     </span>
                                 </div>
                             </div>
 
                             <div className="space-y-2">
                                 <Label className="text-sm font-semibold text-[#00292D]">Category</Label>
-                                <Select value={form.category} onValueChange={(v) => update("category", v)}>
+                                <Select
+                                    value={category}
+                                    onValueChange={setCategory}
+                                    disabled={isUploading || isCreating}
+                                >
                                     <SelectTrigger className="h-11 w-full border-[#00292D]/15 bg-[#F8F8FF] focus:ring-0">
                                         <SelectValue placeholder="Select category" />
                                     </SelectTrigger>
@@ -174,47 +200,60 @@ export default function CreateBlogPage() {
                             <div className="space-y-2">
                                 <Label className="text-sm font-semibold text-[#00292D]">Excerpt</Label>
                                 <Textarea
-                                    value={form.excerpt}
-                                    onChange={(e) => update("excerpt", e.target.value)}
+                                    value={excerpt}
+                                    onChange={(e) => setExcerpt(e.target.value)}
                                     placeholder="Short summary shown on blog listing cards"
                                     className="min-h-[210px] border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
                                     required
+                                    disabled={isUploading || isCreating}
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-5">
+                            <div className="">
+                                <BlobStorage />
+                            </div>
+
                             <div className="space-y-2">
                                 <Label className="text-sm font-semibold text-[#00292D]">Cover image</Label>
 
                                 <div className="rounded-xl border border-[#00292D]/15 bg-[#F8F8FF] p-4">
                                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                                         <div className="space-y-1">
-                                            <div className="text-sm font-semibold text-[#00292D]">
-                                                Upload cover
-                                            </div>
+                                            <div className="text-sm font-semibold text-[#00292D]">Upload cover</div>
                                             <div className="text-xs text-[#00292D]/60">
                                                 Recommended: 16:9 image for best layout
                                             </div>
                                         </div>
 
-                                        <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#00292D] ring-1 ring-[#00292D]/15 hover:bg-white/80">
-                                            <UploadCloud className="h-4 w-4" />
-                                            Choose file
+                                        <label
+                                            className={[
+                                                "inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#00292D] ring-1 ring-[#00292D]/15 hover:bg-white/80",
+                                                isUploading || isCreating ? "pointer-events-none opacity-60" : "cursor-pointer",
+                                            ].join(" ")}
+                                        >
+                                            {isUploading ? (
+                                                <Loader2 className="h-4 w-4 animate-spin" />
+                                            ) : (
+                                                <UploadCloud className="h-4 w-4" />
+                                            )}
+                                            {isUploading ? "Uploading..." : "Choose file"}
                                             <input
                                                 type="file"
                                                 accept="image/*"
                                                 className="hidden"
-                                                onChange={(e) => onCoverChange(e.target.files?.[0] ?? null)}
+                                                onChange={onPickCover}
+                                                disabled={isUploading || isCreating}
                                             />
                                         </label>
                                     </div>
 
                                     <div className="mt-4 overflow-hidden rounded-xl bg-white ring-1 ring-[#00292D]/10">
                                         <div className="relative aspect-[16/9] w-full bg-[#00292D]/5">
-                                            {coverPreview ? (
+                                            {coverImage ? (
                                                 <Image
-                                                    src={coverPreview}
+                                                    src={coverImage}
                                                     alt="Cover preview"
                                                     fill
                                                     className="object-cover"
@@ -228,25 +267,26 @@ export default function CreateBlogPage() {
                                         </div>
                                     </div>
 
-                                    {form.coverFile && (
+                                    {coverFileName ? (
                                         <div className="mt-3 text-xs font-medium text-[#00292D]/60">
-                                            Selected: <span className="font-semibold text-[#00292D]">{form.coverFile.name}</span>
+                                            Selected:{" "}
+                                            <span className="font-semibold text-[#00292D]">{coverFileName}</span>
                                         </div>
-                                    )}
+                                    ) : null}
                                 </div>
                             </div>
-
 
                         </div>
 
                         <div className="space-y-2 md:col-span-2">
                             <Label className="text-sm font-semibold text-[#00292D]">Content</Label>
                             <Textarea
-                                value={form.content}
-                                onChange={(e) => update("content", e.target.value)}
+                                value={content}
+                                onChange={(e) => setContent(e.target.value)}
                                 placeholder="Write the blog content here..."
                                 className="min-h-[260px] border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
                                 required
+                                disabled={isUploading || isCreating}
                             />
                         </div>
                     </div>
@@ -262,7 +302,9 @@ export default function CreateBlogPage() {
                                 variant="outline"
                                 className="h-11 w-full border-[#00292D]/15 bg-white text-[#00292D] hover:bg-white/80 sm:w-auto"
                                 onClick={() => submit("draft")}
+                                disabled={isDisabled || isCreating}
                             >
+                                {isCreating && activeStatus === "draft" ? <Spinner /> : null}
                                 Save Draft
                             </Button>
 
@@ -270,7 +312,9 @@ export default function CreateBlogPage() {
                                 type="button"
                                 className="h-11 w-full bg-[#00292D] text-[#F8F8FF] hover:bg-[#00292D]/90 sm:w-auto"
                                 onClick={() => submit("published")}
+                                disabled={isDisabled || isCreating}
                             >
+                                {isCreating && activeStatus === "published" ? <Spinner /> : null}
                                 Publish
                             </Button>
                         </div>

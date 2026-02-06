@@ -104,7 +104,7 @@ export default function SiteNavbar() {
         <header data-aos="fade-down" className="sticky top-3 z-50 w-full">
             <div
                 className={[
-                    "mx-auto px-2 sm:px-6 lg:px-8 transition-all duration-300",
+                    "mx-auto px-2 sm:px-6 2xl:px-8 transition-all duration-300",
                     scrolled ? "max-w-[1350px]" : "max-w-[1450px]",
                 ].join(" ")}
             >
@@ -120,7 +120,7 @@ export default function SiteNavbar() {
                         </Link>
                     </div>
 
-                    <nav className="hidden lg:flex items-center">
+                    <nav className="hidden 2xl:flex items-center">
                         <NavigationMenu>
                             <NavigationMenuList className="gap-1">
                                 {navItems.map((item) => {
@@ -193,7 +193,7 @@ export default function SiteNavbar() {
                     </nav>
 
                     <div className="flex items-center gap-2 pr-3 sm:pr-4">
-                        <div className="hidden lg:block">
+                        <div className="hidden 2xl:block">
                             <Link href="/contact">
                                 <Button className="rounded-full cursor-pointer bg-[#FFEEB4] text-[#00292D] h-12 px-8 hover:bg-[#FFEEB4]/90">
                                     Get shortlist
@@ -201,7 +201,7 @@ export default function SiteNavbar() {
                             </Link>
                         </div>
 
-                        <div className="lg:hidden">
+                        <div className="2xl:hidden">
                             <Sheet open={open} onOpenChange={setOpen}>
                                 <SheetTrigger asChild>
                                     <button
@@ -215,7 +215,7 @@ export default function SiteNavbar() {
 
                                 <SheetContent
                                     side="right"
-                                    className="w-[320px] border-l border-[#00292D]/10 bg-white/80 p-0 backdrop-blur-xl"
+                                    className="w-[320px] overflow-y-auto border-l border-[#00292D]/10 bg-white/80 p-0 backdrop-blur-xl"
                                 >
                                     <div className="p-2">
                                         <SheetHeader>
@@ -226,7 +226,7 @@ export default function SiteNavbar() {
                                             </SheetTitle>
                                         </SheetHeader>
 
-                                        <div className="mt-6 px-2">
+                                        <div className="mt-6 px-2 ">
                                             <Accordion type="single" collapsible className="space-y-2">
                                                 {navItems.map((item) => {
                                                     if (item.type === "link") {

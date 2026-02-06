@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -15,26 +15,74 @@ import {
     CheckCircle2,
 } from "lucide-react";
 import UserWrapper from "@/app/(wrapper)/UserWrapper";
+import { useQuery } from "@tanstack/react-query";
+import { getBlogBySlug } from "@/lib/api/blogs";
+import { Spinner } from "@/components/ui/spinner";
+
+function estimateReadTime(content: string) {
+    const words = content.trim().split(/\s+/).filter(Boolean).length;
+    const minutes = Math.max(1, Math.ceil(words / 200));
+    return `${minutes} min read`;
+}
 
 export default function BlogDetailPage({
     params,
 }: {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }) {
-    const article = {
-        category: "Insights",
-        title: "Buying Property in Dubai: A Clear 2026 Guide",
-        excerpt:
-            "From communities and budgets to fees and timelines—everything you need to know before buying property in Dubai.",
-        date: "Feb 02, 2026",
-        readTime: "6 min read",
-        cover: "https://images.unsplash.com/photo-1722858814294-99b2323856df?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        author: {
-            name: "Strathmond Insights",
-            role: "Market & Research",
-            avatar: "/images/team/amelia.jpg",
-        },
+
+    const { slug } = use(params);
+
+    console.log("Requested slug:", slug);
+
+    const { data: article, isLoading, isError } = useQuery({
+        queryKey: ["blog", slug],
+        queryFn: () => getBlogBySlug(slug),
+    })
+
+
+    if (isLoading) {
+        return (
+            <UserWrapper>
+                <div className="flex items-center justify-center p-20">
+                    <Spinner />
+                </div>
+            </UserWrapper>
+        );
+    }
+
+    if (isError || !article) {
+        return (
+            <UserWrapper>
+                <div className="flex items-center justify-center p-20 text-red-600">
+                    Blog not found
+                </div>
+            </UserWrapper>
+        );
+    }
+
+    const handleShare = async () => {
+        const shareData = {
+            title: article.title,
+            text: article.excerpt,
+            url: window.location.href,
+        };
+
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (error) {
+                console.error("Share cancelled or failed", error);
+            }
+        } else {
+            await navigator.clipboard.writeText(shareData.url);
+            alert("Link copied to clipboard!");
+        }
     };
+
+
+    const readTime = estimateReadTime(article.content);
+
 
     return (
         <UserWrapper>
@@ -53,17 +101,18 @@ export default function BlogDetailPage({
                             <Button
                                 variant="outline"
                                 className="h-10 rounded-full border-[#00292D]/15 bg-white"
+                                onClick={handleShare}
                             >
-                                <Share2 className="mr-2 h-4 w-4" />
+                                <Share2 className="mr-1 h-4 w-4" />
                                 Share
                             </Button>
-                            <Button
+                            {/* <Button
                                 variant="outline"
                                 className="h-10 rounded-full border-[#00292D]/15 bg-white"
                             >
-                                <Bookmark className="mr-2 h-4 w-4" />
+                                <Bookmark className="mr-1 h-4 w-4" />
                                 Save
-                            </Button>
+                            </Button> */}
                         </div>
                     </div>
                 </div>
@@ -72,9 +121,9 @@ export default function BlogDetailPage({
                     <div className="">
                         <div className="">
                             <div className="overflow-hidden ">
-                                <div className="relative aspect-[16/9] w-full bg-[#00292D]/5">
+                                <div className="relative aspect-[16/9] w-full ">
                                     <Image
-                                        src={article.cover}
+                                        src={article.coverImage}
                                         alt={article.title}
                                         fill
                                         priority
@@ -100,72 +149,20 @@ export default function BlogDetailPage({
                                     <div className="mt-5 flex flex-wrap items-center gap-4 text-xs text-[#00292D]/60">
                                         <span className="inline-flex items-center gap-1.5">
                                             <CalendarDays className="h-3.5 w-3.5" />
-                                            {article.date}
+                                            {article.createdAt ? new Date(article.createdAt).toLocaleDateString() : "—"}
                                         </span>
                                         <span className="inline-flex items-center gap-1.5">
                                             <Clock className="h-3.5 w-3.5" />
-                                            {article.readTime}
+                                            {readTime}
                                         </span>
                                     </div>
 
                                     <Separator className="my-6 bg-[#00292D]/10" />
 
-                                    <div className="flex items-center gap-3">
-                                        <div className="relative h-10 w-10 overflow-hidden rounded-2xl bg-[#00292D]/10">
-                                            <Image
-                                                src={"https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG1hbnxlbnwwfHwwfHx8MA%3D%3D"}
-                                                alt={article.author.name}
-                                                fill
-                                                className="object-cover"
-                                                sizes="40px"
-                                            />
-                                        </div>
-                                        <div>
-                                            <div className="text-sm font-semibold text-[#00292D]">
-                                                {article.author.name}
-                                            </div>
-                                            <div className="text-xs text-[#00292D]/60">
-                                                {article.author.role}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p className="mt-2 leading-relaxed text-[#00292D]/75">{article.content}</p>
+
                                 </div>
                             </div>
-
-                            <div className="mt-6 space-y-8 md:mb-20 mb-10">
-                                {[
-                                    {
-                                        h: "What this guide covers",
-                                        p: "Dubai property decisions move fast. This guide keeps it simple: what to check, what matters, and how to avoid common mistakes.",
-                                    },
-                                    {
-                                        h: "Pick the right community (not just the building)",
-                                        p: "Your lifestyle, commute, and long-term value usually depend more on the community than the listing itself.",
-                                    },
-                                    {
-                                        h: "Know the real costs",
-                                        p: "Look beyond the headline price—factor in fees and admin costs, service charges, and mortgage or payment planning so there are no surprises later.",
-                                    },
-                                    {
-                                        h: "Use a clean shortlist approach",
-                                        p: "A structured shortlist saves time and helps you compare options fairly—especially when inventory changes quickly.",
-                                    },
-                                    {
-                                        h: "Final checks before commitment",
-                                        p: "Confirm availability and timeline, verify view and layout, and make sure contract steps and milestones are clear before you commit.",
-                                    },
-                                    {
-                                        h: "Work with a process, not pressure",
-                                        p: "Move fast when you need to, but decide with clarity. A simple process keeps decisions confident—even in a competitive market.",
-                                    },
-                                ].map((x) => (
-                                    <div key={x.h} className="">
-                                        <h2 className="font-semibold text-[#00292D] text-2xl">{x.h}</h2>
-                                        <p className="mt-2 leading-relaxed text-[#00292D]/75">{x.p}</p>
-                                    </div>
-                                ))}
-                            </div>
-
                         </div>
 
                     </div>

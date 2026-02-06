@@ -12,58 +12,28 @@ import {
     TrendingUp,
 } from "lucide-react";
 import UserWrapper from "@/app/(wrapper)/UserWrapper";
+import { useQuery } from "@tanstack/react-query";
+import { getBlog } from "@/lib/api/blogs";
+import { toast } from "sonner";
+import { Spinner } from "@/components/ui/spinner";
+import { Blog } from "@/types/blog";
 
-type BlogPost = {
-    slug: string;
-    title: string;
-    excerpt: string;
-    category: string;
-    date: string;
-    readTime: string;
-    image: string;
-    featured?: boolean;
-};
 
-const posts: BlogPost[] = [
-    {
-        slug: "renting-dubai-mistakes",
-        title: "7 Common Renting Mistakes in Dubai (and How to Avoid Them)",
-        excerpt:
-            "Renting moves fast in Dubai. Here’s how to avoid overpaying, bad contracts, and rushed decisions.",
-        category: "Renting",
-        date: "Jan 26, 2026",
-        readTime: "5 min read",
-        image: "https://images.unsplash.com/photo-1722858814294-99b2323856df?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-        slug: "off-plan-investment-explained",
-        title: "Off Plan Properties Explained: Risks, Rewards & Timing",
-        excerpt:
-            "Off plan can unlock value—but only if chosen correctly. Learn how to evaluate projects properly.",
-        category: "Off Plan",
-        date: "Jan 18, 2026",
-        readTime: "7 min read",
-        image: "https://images.unsplash.com/photo-1722858814294-99b2323856df?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-        slug: "best-communities-dubai",
-        title: "Best Communities to Live in Dubai (Lifestyle Guide)",
-        excerpt:
-            "Downtown, Marina, Dubai Hills, Creek Harbour—how to choose based on lifestyle and value.",
-        category: "Communities",
-        date: "Jan 10, 2026",
-        readTime: "6 min read",
-        image: "https://images.unsplash.com/photo-1722858814294-99b2323856df?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-];
+function estimateReadTime(content: string) {
+    const words = content.trim().split(/\s+/).filter(Boolean).length;
+    const minutes = Math.max(1, Math.ceil(words / 200));
+    return `${minutes} min read`;
+}
 
-function BlogCard({ post }: { post: BlogPost }) {
+function BlogCard({ blog }: { blog: Blog }) {
+    const readTime = estimateReadTime(blog.content);
+
     return (
         <div data-aos="fade-up" className="group overflow-hidden rounded-2xl bg-white ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="relative aspect-[16/12] w-full bg-[#00292D]/5">
                 <Image
-                    src={post.image}
-                    alt={post.title}
+                    src={blog.coverImage}
+                    alt={blog.title}
                     fill
                     className="object-cover transition duration-500"
                     sizes="(max-width: 1024px) 100vw, 33vw"
@@ -71,28 +41,28 @@ function BlogCard({ post }: { post: BlogPost }) {
 
                 <div className="absolute left-5 top-5">
                     <Badge className="rounded-full bg-[#FFEEB4] text-[#00292D] hover:bg-[#FFEEB4]">
-                        {post.category}
+                        {blog.category}
                     </Badge>
                 </div>
             </div>
 
             <div className="p-6">
                 <h3 className="text-lg font-semibold text-[#00292D]">
-                    {post.title}
+                    {blog.title}
                 </h3>
 
-                <p className="mt-2 text-sm leading-relaxed text-[#00292D]/70">
-                    {post.excerpt}
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#00292D]/70">
+                    {blog.excerpt}
                 </p>
 
                 <div className="mt-4 flex items-center gap-4 text-xs text-[#00292D]/60">
                     <span className="inline-flex items-center gap-1">
                         <CalendarDays className="h-3.5 w-3.5" />
-                        {post.date}
+                        {blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : "—"}
                     </span>
                     <span className="inline-flex items-center gap-1">
                         <Clock className="h-3.5 w-3.5" />
-                        {post.readTime}
+                        {readTime}
                     </span>
                 </div>
 
@@ -104,13 +74,31 @@ function BlogCard({ post }: { post: BlogPost }) {
     );
 }
 
+
 export default function BlogPage() {
-    const featured = posts.find((p) => p.featured);
-    const rest = posts.filter((p) => !p.featured);
+
+    const { data = [], isLoading, isError } = useQuery({
+        queryKey: ["blogs"],
+        queryFn: () => getBlog({ status: "published" })
+    })
+
+    if (isError) {
+        return (
+            toast.error(isError || "Failed to load blogs")
+        );
+    }
 
     return (
         <UserWrapper>
             <main className="bg-[#F8F8FF]">
+                {
+                    isLoading && (
+                        <div className="flex items-center justify-center p-20"><Spinner /></div >
+                    )
+                }
+
+
+
                 {/* HERO */}
                 <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
                     <div data-aos="fade-up" className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -130,20 +118,28 @@ export default function BlogPage() {
                             </p>
                         </div>
 
-                        <Button
+                        {/* <Button
                             className="h-11 rounded-full bg-[#00292D] px-6 text-[#F8F8FF] hover:bg-[#00292D]/90"
                         >
                             Subscribe
-                        </Button>
+                        </Button> */}
                     </div>
                 </section>
+
+                {
+                    data.length === 0 && (
+                        <div className="flex items-center justify-center p-20 text-zinc-600">
+                            No blogs avaliabe at the moment
+                        </div>
+                    )
+                }
 
                 {/* GRID */}
                 <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {rest.map((post) => (
-                            <Link key={post.slug} href={`/blog/${post.slug}`}>
-                                <BlogCard post={post} />
+                        {data.map((blog) => (
+                            <Link key={blog._id ?? blog.slug} href={`/blog/${blog.slug}`}>
+                                <BlogCard blog={blog} />
                             </Link>
                         ))}
                     </div>
