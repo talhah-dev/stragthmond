@@ -2,6 +2,7 @@ import AdminStats from "@/components/admin/AdminStats";
 import PropertiesTable from "@/components/admin/PropertiesTable";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import Link from "next/link";
 
 export default function AdminPage() {
     return (
@@ -16,10 +17,12 @@ export default function AdminPage() {
                             Strathmond platform snapshot
                         </p>
                     </div>
-                    <Button className="rounded-md bg-red-600 text-white hover:bg-red-700">
-                        <LogOut />
-                        Logout
-                    </Button>
+                    <Link href={"/login"}>
+                        <Button className="rounded-md bg-red-600 text-white hover:bg-red-700">
+                            <LogOut />
+                            Logout
+                        </Button>
+                    </Link>
                 </div>
 
                 <AdminStats />

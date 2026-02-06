@@ -2,6 +2,11 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { getContact } from "@/lib/api/contact";
+import { Contact } from "@/types/Contact";
+import { useQuery } from "@tanstack/react-query";
+import { Spinner } from "../ui/spinner";
+import { toast } from "sonner";
 
 interface Enquiry {
   id: string;
@@ -52,24 +57,40 @@ function Field({ label, value }: { label: string; value: string }) {
 }
 
 export default function UserEnquiriesTable() {
+
+  const { data = [], isLoading, isError } = useQuery<Contact[], Error>({
+    queryKey: ["contacts"],
+    queryFn: () => getContact(),
+  });
+
+  if (isLoading) {
+    return <div className="flex items-center justify-center p-20"><Spinner /></div >;
+  }
+
+  if (isError) {
+    return (
+      toast.error(isError || "Failed to load blogs")
+    );
+  }
+
   return (
     <div className="space-y-6">
-      {enquiries.map((enquiry) => (
+      {data.map((enquiry) => (
         <Card
-          key={enquiry.id}
+          key={enquiry._id}
           className="rounded-xl border bg-white ring-1 ring-[#00292D]/10"
         >
           <CardContent className="p-6">
             <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
               <div className="space-y-1">
                 <div className="text-lg font-semibold text-[#00292D]">
-                  {enquiry.fullName}
+                  {enquiry.fullname}
                 </div>
                 <div className="text-sm text-[#00292D]/60">{enquiry.email}</div>
               </div>
 
               <div className="inline-flex w-fit items-center rounded-lg bg-[#F8F8FF] px-3 py-2 text-xs font-semibold text-[#00292D] ring-1 ring-[#00292D]/10">
-                Submitted: {enquiry.date}
+                Submitted: {enquiry.createdAt ? new Date(enquiry.createdAt).toLocaleDateString() : "—"}
               </div>
             </div>
 
@@ -84,7 +105,7 @@ export default function UserEnquiriesTable() {
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <Field label="Budget" value={enquiry.budget || "—"} />
-                  <Field label="Preferred Area" value={enquiry.location || "—"} />
+                  <Field label="Preferred Area" value={enquiry.preferredArea || "—"} />
                 </div>
               </div>
 

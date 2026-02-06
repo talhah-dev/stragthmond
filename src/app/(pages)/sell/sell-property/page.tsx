@@ -5,18 +5,11 @@ import Link from "next/link";
 import HeroSections from "@/components/HeroSections";
 import UserWrapper from "@/app/(wrapper)/UserWrapper";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+
 import { Badge } from "@/components/ui/badge";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+
 import {
     Accordion,
     AccordionContent,
@@ -32,6 +25,7 @@ import {
     ShieldCheck,
     Sparkles,
 } from "lucide-react";
+import SellYourPropertyForm from "@/components/sellProperty/SellYourPropertyForm";
 
 function Chip({ children }: { children: React.ReactNode }) {
     return (
@@ -51,7 +45,7 @@ function ValueCard({
     desc: string;
 }) {
     return (
-        <div  data-aos="fade-up" className="rounded-2xl bg-white p-6 ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md">
+        <div data-aos="fade-up" className="rounded-2xl bg-white p-6 ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="flex items-start gap-3">
                 <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#00292D] text-[#F8F8FF]">
                     <Icon className="h-6 w-6" />
@@ -68,10 +62,6 @@ function ValueCard({
 }
 
 export default function SellYourProperty() {
-    const [propertyType, setPropertyType] = React.useState<string>("apartment");
-    const [bedrooms, setBedrooms] = React.useState<string>("2");
-    const [timeline, setTimeline] = React.useState<string>("30-60");
-    const [budget, setBudget] = React.useState<string>("not-sure");
 
     return (
         <UserWrapper>
@@ -142,141 +132,7 @@ export default function SellYourProperty() {
                                     Fill in what you know—if you’re unsure, that’s fine.
                                 </div>
 
-                                <form className="mt-6 grid gap-4 sm:grid-cols-2">
-                                    <div className="sm:col-span-1">
-                                        <Label htmlFor="name" className="text-sm font-semibold text-[#00292D]">
-                                            Full name
-                                        </Label>
-                                        <Input
-                                            id="name"
-                                            placeholder="Your name"
-                                            className="mt-2 h-11  border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
-                                        />
-                                    </div>
-
-                                    <div className="sm:col-span-1">
-                                        <Label htmlFor="email" className="text-sm font-semibold text-[#00292D]">
-                                            Email
-                                        </Label>
-                                        <Input
-                                            id="email"
-                                            type="email"
-                                            placeholder="you@email.com"
-                                            className="mt-2 h-11  border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
-                                        />
-                                    </div>
-
-                                    <div className="sm:col-span-1">
-                                        <Label htmlFor="phone" className="text-sm font-semibold text-[#00292D]">
-                                            Phone (optional)
-                                        </Label>
-                                        <Input
-                                            id="phone"
-                                            placeholder="+971…"
-                                            className="mt-2 h-11  border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
-                                        />
-                                    </div>
-
-                                    <div className="sm:col-span-1">
-                                        <Label className="text-sm font-semibold text-[#00292D]">
-                                            Property type
-                                        </Label>
-                                        <Select value={propertyType} onValueChange={setPropertyType}>
-                                            <SelectTrigger className="mt-2 h-11 w-full  border-[#00292D]/15 bg-[#F8F8FF] focus:ring-0">
-                                                <SelectValue placeholder="Select type" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="apartment">Apartment</SelectItem>
-                                                <SelectItem value="villa">Villa</SelectItem>
-                                                <SelectItem value="townhouse">Townhouse</SelectItem>
-                                                <SelectItem value="penthouse">Penthouse</SelectItem>
-                                                <SelectItem value="commercial">Commercial</SelectItem>
-                                                <SelectItem value="land">Land / Plot</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <Label htmlFor="address" className="text-sm font-semibold text-[#00292D]">
-                                            Property address / building / community
-                                        </Label>
-                                        <Input
-                                            id="address"
-                                            placeholder="e.g., Downtown Dubai, Burj Views, Tower B"
-                                            className="mt-2 h-11  border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
-                                        />
-                                    </div>
-
-                                    <div className="sm:col-span-1">
-                                        <Label className="text-sm font-semibold text-[#00292D]">
-                                            Bedrooms
-                                        </Label>
-                                        <Select value={bedrooms} onValueChange={setBedrooms}>
-                                            <SelectTrigger className="mt-2 h-11 w-full  border-[#00292D]/15 bg-[#F8F8FF] focus:ring-0">
-                                                <SelectValue placeholder="Bedrooms" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="studio">Studio</SelectItem>
-                                                <SelectItem value="1">1</SelectItem>
-                                                <SelectItem value="2">2</SelectItem>
-                                                <SelectItem value="3">3</SelectItem>
-                                                <SelectItem value="4">4+</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-
-                                    <div className="sm:col-span-1">
-                                        <Label className="text-sm font-semibold text-[#00292D]">
-                                            Selling timeline
-                                        </Label>
-                                        <Select value={timeline} onValueChange={setTimeline}>
-                                            <SelectTrigger className="mt-2 w-full h-11  border-[#00292D]/15 bg-[#F8F8FF] focus:ring-0">
-                                                <SelectValue placeholder="Timeline" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="0-30">0–30 days</SelectItem>
-                                                <SelectItem value="30-60">30–60 days</SelectItem>
-                                                <SelectItem value="60-90">60–90 days</SelectItem>
-                                                <SelectItem value="90+">90+ days</SelectItem>
-                                                <SelectItem value="not-sure">Not sure</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <Label className="text-sm font-semibold text-[#00292D]">
-                                            Preferred price expectation
-                                        </Label>
-                                        <Select value={budget} onValueChange={setBudget}>
-                                            <SelectTrigger className="mt-2 w-full h-11  border-[#00292D]/15 bg-[#F8F8FF] focus:ring-0">
-                                                <SelectValue placeholder="Select" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="not-sure">Not sure (need guidance)</SelectItem>
-                                                <SelectItem value="market">Market-based valuation</SelectItem>
-                                                <SelectItem value="best">Best possible price</SelectItem>
-                                                <SelectItem value="fast">Sell fast (speed priority)</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <Label htmlFor="notes" className="text-sm font-semibold text-[#00292D]">
-                                            Notes (optional)
-                                        </Label>
-                                        <Textarea
-                                            id="notes"
-                                            placeholder="Condition, upgrades, tenancy status, view type, parking, etc."
-                                            className="mt-2 min-h-[110px]  border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
-                                        />
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <Button className="h-12 w-full bg-[#00292D] text-[#F8F8FF] hover:bg-[#00292D]/90">
-                                            Submit details
-                                        </Button>
-                                    </div>
-                                </form>
+                                <SellYourPropertyForm />
                             </div>
                         </div>
                     </div>
