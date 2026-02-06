@@ -33,8 +33,6 @@ export default function BlogDetailPage({
 
     const { slug } = use(params);
 
-    console.log("Requested slug:", slug);
-
     const { data: article, isLoading, isError } = useQuery({
         queryKey: ["blog", slug],
         queryFn: () => getBlogBySlug(slug),

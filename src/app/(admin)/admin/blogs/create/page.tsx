@@ -14,7 +14,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft, FileText, UploadCloud, Loader2 } from "lucide-react";
+import { ArrowLeft, FileText, UploadCloud, Loader2, Bot } from "lucide-react";
 import type { Blog } from "@/types/blog";
 import { upload } from "@vercel/blob/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -89,7 +89,7 @@ export default function CreateBlogPage() {
                 access: "public",
                 handleUploadUrl: "/api/upload",
             });
-            
+
             setCoverImage(blob.url);
             setCoverFileName(file.name);
             queryClient.invalidateQueries({ queryKey: ["blob-usage"] });
@@ -203,7 +203,7 @@ export default function CreateBlogPage() {
                                     value={excerpt}
                                     onChange={(e) => setExcerpt(e.target.value)}
                                     placeholder="Short summary shown on blog listing cards"
-                                    className="min-h-[210px] border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
+                                    className="min-h-[260px] border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
                                     required
                                     disabled={isUploading || isCreating}
                                 />
@@ -279,7 +279,45 @@ export default function CreateBlogPage() {
                         </div>
 
                         <div className="space-y-2 md:col-span-2">
-                            <Label className="text-sm font-semibold text-[#00292D]">Content</Label>
+                            <div className="flex items-center justify-between">
+                                <Label className="text-sm font-semibold text-[#00292D]">Content</Label>
+
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    className="cursor-pointer"
+                                    onClick={async () => {
+                                        toast.loading("Generating content...");
+
+                                        const res = await fetch("/api/ai/generate-blog", {
+                                            method: "POST",
+                                            headers: { "Content-Type": "application/json" },
+                                            body: JSON.stringify({
+                                                title,
+                                                category,
+                                                excerpt,
+                                                tone: "premium, confident, trustworthy",
+                                                length: "1500-2000 words",
+                                            }),
+                                        });
+
+                                        const json = await res.json();
+                                        toast.dismiss();
+
+                                        if (json.success) {
+                                            setContent(json.content);
+                                            toast.success("Content generated");
+                                        } else {
+                                            toast.error(json.message);
+                                        }
+                                    }}
+                                    disabled={!title || isUploading || isCreating}
+                                >
+                                    <Bot />
+                                    Generate with AI
+                                </Button>
+                            </div>
+
                             <Textarea
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}

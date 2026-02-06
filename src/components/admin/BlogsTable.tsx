@@ -67,7 +67,6 @@ export default function BlogsTable() {
         );
     }
 
-
     return (
         <div className="overflow-hidden rounded-xl border bg-white">
             <Table>
@@ -85,7 +84,7 @@ export default function BlogsTable() {
                     {data.map((blog) => (
                         <TableRow key={blog.slug} className="hover:bg-muted/40">
                             <TableCell className="px-6 font-medium max-w-[420px]">
-                                {blog.title}
+                                {blog.title.slice(0, 40) + (blog.title.length > 40 ? "..." : "")}
                             </TableCell>
 
                             <TableCell className="px-6 text-muted-foreground">
@@ -131,7 +130,7 @@ export default function BlogsTable() {
 
                                         <Tooltip>
                                             <TooltipTrigger asChild>
-                                                <Link href={"/admin/blogs/1/edit"}>
+                                                <Link href={`/admin/blogs/${blog.slug}/edit`}>
                                                     <Button
                                                         variant="outline"
                                                         size="icon"

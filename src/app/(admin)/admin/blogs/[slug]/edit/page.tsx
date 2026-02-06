@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -15,84 +15,165 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { ArrowLeft, FileText, UploadCloud } from "lucide-react";
+import { getBlogBySlug, updateBlogBySlug } from "@/lib/api/blogs";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Spinner } from "@/components/ui/spinner";
+import { Blog } from "@/types/blog";
+import { toast } from "sonner";
+import { upload } from "@vercel/blob/client";
 
-type BlogForm = {
-    title: string;
-    slug: string;
-    category: string;
-    excerpt: string;
-    authorName: string;
-    authorRole: string;
-    content: string;
-    coverFile: File | null;
-};
-
-const initialState: BlogForm = {
-    title: "Buying Property in Dubai: A Clear 2026 Guide",
-    slug: "buying-property-in-dubai-a-clear-2026-guide",
-    category: "Insights",
-    excerpt:
-        "From communities and budgets to fees and timelines—everything you need to know before buying property in Dubai.",
-    authorName: "Strathmond Insights",
-    authorRole: "Market & Research",
-    content:
-        "What this guide covers...\n\nPick the right community...\n\nKnow the real costs...\n\nFinal checks before commitment...\n\nWork with a process, not pressure...",
-    coverFile: null,
-};
-
-function slugify(input: string) {
-    return input
+function toSlug(value: string) {
+    return (value ?? "")
         .toLowerCase()
         .trim()
         .replace(/['"]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .slice(0, 80);
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
 }
 
-export default function EditBlogPage({ params }: { params: { slug: string } }) {
-    const [form, setForm] = React.useState<BlogForm>(() => ({
-        ...initialState,
-        slug: params.slug || initialState.slug,
-    }));
-    const [coverPreview, setCoverPreview] = React.useState<string>("");
+export default function EditBlogPage({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
 
-    const update = (key: keyof BlogForm, value: string) => {
-        setForm((p) => ({ ...p, [key]: value }));
-    };
+    const [title, setTitle] = useState("");
+    const [slug, setSlug] = useState("");
+    const [category, setCategory] = useState("");
+    const [excerpt, setExcerpt] = useState("");
+    const [content, setContent] = useState("");
+    const [coverImage, setCoverImage] = useState<string>("");
+    const [activeStatus, setActiveStatus] = useState<Blog["status"] | null>(null);
+    const [coverFileName, setCoverFileName] = useState("");
+    const [isUploading, setIsUploading] = useState(false);
 
-    const onTitleChange = (v: string) => {
-        const slug = slugify(v);
-        setForm((p) => ({ ...p, title: v, slug: p.slug || slug }));
-    };
+    useEffect(() => {
+        if (!title) return;
+        setSlug(toSlug(title));
+    }, [title]);
 
-    const onCoverChange = (file: File | null) => {
-        setForm((p) => ({ ...p, coverFile: file }));
-        if (coverPreview) URL.revokeObjectURL(coverPreview);
-        if (!file) {
-            setCoverPreview("");
-            return;
+    const { slug: slugparams } = use(params);
+
+    const { data: blog, isLoading, isError } = useQuery({
+        queryKey: ["blog", slugparams],
+        queryFn: () => getBlogBySlug(slugparams),
+    })
+
+    useEffect(() => {
+        if (!blog) return;
+        setTitle(blog.title ?? "");
+        setSlug(blog.slug ?? "");
+        setCategory(blog.category ?? "Insights");
+        setExcerpt(blog.excerpt ?? "");
+        setContent(blog.content ?? "");
+        setCoverImage(blog.coverImage ?? "");
+    }, [blog]);
+
+    const queryClient = useQueryClient();
+
+    const { mutate: mutateCreateBlog, isPending: isCreating } = useMutation({
+        mutationFn: async (payload: Blog) => {
+            return updateBlogBySlug(slugparams, payload);
+        },
+        onSuccess: (data: any) => {
+            setActiveStatus(null);
+            setTitle("");
+            setSlug("");
+            setCategory("");
+            setExcerpt("");
+            setContent("");
+            setCoverImage("");
+            setCoverFileName("");
+            toast.success(data?.message || "Blog update successfully");
+            queryClient.invalidateQueries({ queryKey: ["blogs"] });
+            queryClient.invalidateQueries({ queryKey: ["blog"] });
+        },
+        onError: (err: any) => {
+            setActiveStatus(null);
+            toast.error(err?.message || "Unauthorized access");
+        },
+    });
+
+    const onPickCover = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setIsUploading(true);
+
+        const oldUrl = coverImage;
+
+        const fileType = file.name.split(".").pop();
+        const base = file.name.replace(/\.[^/.]+$/, "");
+        const uniqueName = `${base}-${crypto.randomUUID()}.${fileType}`;
+
+        try {
+            const blob = await upload(uniqueName, file, {
+                access: "public",
+                handleUploadUrl: "/api/upload",
+            });
+
+            setCoverImage(blob.url);
+            setCoverFileName(file.name);
+
+            if (oldUrl) {
+                await fetch("/api/admin/blob/delete", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: oldUrl }),
+                });
+            }
+
+            queryClient.invalidateQueries({ queryKey: ["blob-usage"] });
+        } catch (err: any) {
+            toast.error(err?.message || "Image upload failed");
+        } finally {
+            setIsUploading(false);
+            e.target.value = "";
         }
-        setCoverPreview(URL.createObjectURL(file));
     };
 
-    const submit = (status: "draft" | "published") => {
-        const payload = {
-            status,
-            originalSlug: params.slug,
-            title: form.title,
-            slug: form.slug,
-            category: form.category,
-            excerpt: form.excerpt,
-            authorName: form.authorName,
-            authorRole: form.authorRole,
-            content: form.content,
-            coverFile: form.coverFile
-                ? { name: form.coverFile.name, type: form.coverFile.type, size: form.coverFile.size }
-                : null,
+    const submit = (nextStatus: Blog["status"]) => {
+        setActiveStatus(nextStatus);
+
+        const payload: Blog = {
+            status: nextStatus,
+            title: title.trim(),
+            slug: slug.trim(),
+            category,
+            excerpt: excerpt.trim(),
+            content: content.trim(),
+            coverImage,
         };
-        console.log("BLOG UPDATE:", payload);
+
+        mutateCreateBlog(payload);
     };
+
+    const isDisabled =
+        isUploading ||
+        isCreating ||
+        !title.trim() ||
+        !category ||
+        !excerpt.trim() ||
+        !content.trim() ||
+        !coverImage;
+
+
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center p-20">
+                <Spinner />
+            </div>
+        );
+    }
+
+    if (isError || !blog) {
+        return (
+            <div className="flex items-center justify-center p-20 text-red-600">
+                Blog not found
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-[#F8F8FF] px-6 py-8">
@@ -129,23 +210,28 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
                             <div className="space-y-2">
                                 <Label className="text-sm font-semibold text-[#00292D]">Title</Label>
                                 <Input
-                                    value={form.title}
-                                    onChange={(e) => onTitleChange(e.target.value)}
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
                                     placeholder="e.g. Buying Property in Dubai: A Clear 2026 Guide"
                                     className="h-11 border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
                                     required
+                                    disabled={isUploading || isCreating}
                                 />
                                 <div className="text-xs font-medium text-[#00292D]/60">
                                     Slug:{" "}
                                     <span className="font-semibold text-[#00292D]">
-                                        {form.slug || params.slug}
+                                        {slugparams || slug}
                                     </span>
                                 </div>
                             </div>
 
                             <div className="space-y-2">
                                 <Label className="text-sm font-semibold text-[#00292D]">Category</Label>
-                                <Select value={form.category} onValueChange={(v) => update("category", v)}>
+                                <Select
+                                    value={category}
+                                    onValueChange={setCategory}
+                                    disabled={isUploading || isCreating}
+                                >
                                     <SelectTrigger className="h-11 w-full border-[#00292D]/15 bg-[#F8F8FF] focus:ring-0">
                                         <SelectValue placeholder="Select category" />
                                     </SelectTrigger>
@@ -163,11 +249,12 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
                             <div className="space-y-2">
                                 <Label className="text-sm font-semibold text-[#00292D]">Excerpt</Label>
                                 <Textarea
-                                    value={form.excerpt}
-                                    onChange={(e) => update("excerpt", e.target.value)}
+                                    value={excerpt}
+                                    onChange={(e) => setExcerpt(e.target.value)}
                                     placeholder="Short summary shown on blog listing cards"
                                     className="min-h-[210px] border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
                                     required
+                                    disabled={isUploading || isCreating}
                                 />
                             </div>
                         </div>
@@ -187,23 +274,33 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
                                             </div>
                                         </div>
 
-                                        <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#00292D] ring-1 ring-[#00292D]/15 hover:bg-white/80">
-                                            <UploadCloud className="h-4 w-4" />
-                                            Choose file
+                                        <label
+                                            className={[
+                                                "inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#00292D] ring-1 ring-[#00292D]/15 hover:bg-white/80",
+                                                isUploading || isCreating ? "pointer-events-none opacity-60" : "cursor-pointer",
+                                            ].join(" ")}
+                                        >
+                                            {isUploading ? (
+                                                <Spinner />
+                                            ) : (
+                                                <UploadCloud className="h-4 w-4" />
+                                            )}
+                                            {isUploading ? "Uploading..." : "Change image"}
                                             <input
                                                 type="file"
                                                 accept="image/*"
                                                 className="hidden"
-                                                onChange={(e) => onCoverChange(e.target.files?.[0] ?? null)}
+                                                onChange={onPickCover}
+                                                disabled={isUploading || isCreating}
                                             />
                                         </label>
                                     </div>
 
                                     <div className="mt-4 overflow-hidden rounded-xl bg-white ring-1 ring-[#00292D]/10">
                                         <div className="relative aspect-[16/9] w-full bg-[#00292D]/5">
-                                            {coverPreview ? (
+                                            {coverImage ? (
                                                 <Image
-                                                    src={coverPreview}
+                                                    src={coverImage}
                                                     alt="Cover preview"
                                                     fill
                                                     className="object-cover"
@@ -217,14 +314,12 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
                                         </div>
                                     </div>
 
-                                    {form.coverFile && (
+                                    {coverFileName ? (
                                         <div className="mt-3 text-xs font-medium text-[#00292D]/60">
                                             Selected:{" "}
-                                            <span className="font-semibold text-[#00292D]">
-                                                {form.coverFile.name}
-                                            </span>
+                                            <span className="font-semibold text-[#00292D]">{coverFileName}</span>
                                         </div>
-                                    )}
+                                    ) : null}
                                 </div>
                             </div>
                         </div>
@@ -232,11 +327,12 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
                         <div className="space-y-2 md:col-span-2">
                             <Label className="text-sm font-semibold text-[#00292D]">Content</Label>
                             <Textarea
-                                value={form.content}
-                                onChange={(e) => update("content", e.target.value)}
+                                value={content}
+                                onChange={(e) => setContent(e.target.value)}
                                 placeholder="Write the blog content here..."
                                 className="min-h-[260px] border-[#00292D]/15 bg-[#F8F8FF] focus-visible:ring-0 focus-visible:ring-offset-0"
                                 required
+                                disabled={isUploading || isCreating}
                             />
                         </div>
                     </div>
@@ -252,7 +348,9 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
                                 variant="outline"
                                 className="h-11 w-full border-[#00292D]/15 bg-white text-[#00292D] hover:bg-white/80 sm:w-auto"
                                 onClick={() => submit("draft")}
+                                disabled={isDisabled || isCreating}
                             >
+                                {isCreating && activeStatus === "draft" ? <Spinner /> : null}
                                 Save Draft
                             </Button>
 
@@ -260,8 +358,10 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
                                 type="button"
                                 className="h-11 w-full bg-[#00292D] text-[#F8F8FF] hover:bg-[#00292D]/90 sm:w-auto"
                                 onClick={() => submit("published")}
+                                disabled={isDisabled || isCreating}
                             >
-                                Update & Publish
+                                {isCreating && activeStatus === "published" ? <Spinner /> : null}
+                                Update Blog
                             </Button>
                         </div>
                     </div>
