@@ -41,6 +41,7 @@ const navItems: NavItem[] = [
         label: "Buy Property",
         items: [
             // { href: "/buy/properties-for-sale", label: "Properties for Sale" },
+            { href: "/cooming-soon", label: "Properties for Sale" },
             { href: "/buy/buy-property", label: "Buy property" },
         ],
     },
@@ -49,6 +50,7 @@ const navItems: NavItem[] = [
         label: "Rent Property",
         items: [
             // { href: "/rent/properties-for-rent", label: "Properties for Rent" },
+            { href: "/cooming-soon", label: "Properties for Rent" },
             { href: "/rent/rent-property", label: "Rent property" },
         ],
     },
