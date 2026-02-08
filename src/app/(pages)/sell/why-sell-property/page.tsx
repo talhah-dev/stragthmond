@@ -92,7 +92,7 @@ export default function WhySellPropertyDubaiPage() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Sell Property in Dubai"
+                    heading="Sell Property"
                     subheading="A premium selling experience—positioning, pricing, marketing, and negotiation handled with clarity."
                 />
 

@@ -166,7 +166,7 @@ export default function Career() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Careers at Strathmond"
+                    heading="Careers"
                     subheading="Build premium real estate experiences with a team that values clarity, structure, and trust."
                 />
 

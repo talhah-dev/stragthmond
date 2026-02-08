@@ -77,7 +77,7 @@ export default function About() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="About Strathmond"
+                    heading="About"
                     subheading="A premium Dubai real estate experience—curated listings, honest context, and a structured process for confident decisions."
                 />
 

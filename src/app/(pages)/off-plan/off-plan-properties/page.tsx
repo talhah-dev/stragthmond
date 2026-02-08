@@ -45,7 +45,7 @@ function FeatureCard({
     desc: string;
 }) {
     return (
-        <div className="rounded-[28px] bg-white p-6 ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md">
+        <div data-aos="fade-up" className="rounded-[28px] bg-white p-6 ring-1 ring-[#00292D]/10 transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="flex items-start gap-3">
                 <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#00292D] text-[#F8F8FF]">
                     <Icon className="h-6 w-6" />
@@ -89,13 +89,13 @@ export default function OffPlanPropertiesInDubaiPage() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Off Plan Properties in Dubai"
+                    heading="Off Plan Properties"
                     subheading="Explore new launches with clarity—payment plans, project comparisons, and risk-aware recommendations."
                 />
 
                 <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16 md:mt-10 mt-5">
                     <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-                        <div className="lg:col-span-7">
+                        <div data-aos="fade-up" className="lg:col-span-7">
                             <div className="flex flex-wrap gap-2">
                                 <Chip>New launches</Chip>
                                 <Chip>Payment plans</Chip>
@@ -131,7 +131,7 @@ export default function OffPlanPropertiesInDubaiPage() {
                             </div>
                         </div>
 
-                        <div className="lg:col-span-5">
+                        <div data-aos="fade-up" data-aos-delay="200"className="lg:col-span-5">
                             <div className="rounded-[28px] bg-white p-6 ring-1 ring-[#00292D]/10">
                                 <div className="flex items-start gap-3">
                                     <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#FFEEB4] text-[#00292D]">
@@ -183,7 +183,7 @@ export default function OffPlanPropertiesInDubaiPage() {
                 </section>
 
                 <section className="mx-auto md:mt-16 mt-10 max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                    <div data-aos="fade-up" className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <div>
                             <div className="text-xs font-semibold tracking-widest text-[#00292D]/55">WHY OFF PLAN</div>
                             <h3 className="mt-2 text-balance text-2xl font-semibold text-[#00292D] sm:text-3xl">
@@ -228,7 +228,7 @@ export default function OffPlanPropertiesInDubaiPage() {
                 </section>
 
                 <section className="mx-auto md:mt-16 mt-10 max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
-                    <div className="rounded-[28px] bg-white p-8 ring-1 ring-[#00292D]/10 sm:p-10">
+                    <div data-aos="zoom-in-up" className="rounded-[28px] bg-white p-8 ring-1 ring-[#00292D]/10 sm:p-10">
                         <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
                             <div className="lg:col-span-5">
                                 <div className="text-xs font-semibold tracking-widest text-[#00292D]/55">HOW WE HELP</div>
@@ -277,7 +277,7 @@ export default function OffPlanPropertiesInDubaiPage() {
 
                 <section className="mx-auto md:mt-16 mt-10 max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
                     <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-                        <div className="lg:col-span-5">
+                        <div data-aos="fade-up" className="lg:col-span-5">
                             <div className="text-xs font-semibold tracking-widest text-[#00292D]/55">FAQ</div>
                             <h2 className="mt-2 text-balance text-2xl font-semibold tracking-tight text-[#00292D] sm:text-3xl">
                                 Off plan questions, answered
@@ -298,7 +298,7 @@ export default function OffPlanPropertiesInDubaiPage() {
                             </div>
                         </div>
 
-                        <div className="lg:col-span-7">
+                        <div data-aos="fade-up" data-aos-delay="200" className="lg:col-span-7">
                             <div className="rounded-xl bg-white p-4 sm:p-6 ring-1 ring-[#00292D]/10">
                                 <Accordion type="single" collapsible className="w-full">
                                     <AccordionItem value="faq-1" className="border-b border-[#00292D]/10">
@@ -356,7 +356,7 @@ export default function OffPlanPropertiesInDubaiPage() {
                 </section>
 
                 <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
-                    <div className="rounded-[28px] bg-[#00292D] p-8 text-[#F8F8FF] sm:p-10">
+                    <div data-aos="zoom-in-up" className="rounded-[28px] bg-[#00292D] p-8 text-[#F8F8FF] sm:p-10">
                         <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
                             <div className="lg:col-span-8">
                                 <div className="text-xs font-semibold tracking-widest text-[#F8F8FF]/60">OFF PLAN, DONE RIGHT</div>

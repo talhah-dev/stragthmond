@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Home2() {
     return (
-        <div className="md:px-5 px-3" data-aos="zoom-out-up">
+        <div className="md:px-5 px-3" data-aos="zoom-out-up" data-aos-delay="500">
 
             <div className=" mx-auto md:h-[calc(100vh-120px)] h-[calc(100vh-100px)] overflow-hidden rounded-xl md:mt-5 mt-5">
                 <video

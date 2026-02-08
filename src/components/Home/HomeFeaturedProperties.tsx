@@ -211,7 +211,7 @@ export default function HomeFeaturedProperties() {
                     </div>
 
                     <div data-aos="fade-up" className="flex flex-wrap items-center gap-2">
-                        <div className="inline-flex rounded-2xl bg-white p-1 ring-1 ring-[#00292D]/10">
+                        {/* <div className="inline-flex rounded-2xl bg-white p-1 ring-1 ring-[#00292D]/10">
                             {(["Buy", "Rent", "Off Plan"] as const).map((t) => {
                                 const isActive = active === t;
                                 return (
@@ -230,7 +230,7 @@ export default function HomeFeaturedProperties() {
                                     </button>
                                 );
                             })}
-                        </div>
+                        </div> */}
 
                         <Button asChild className="bg-[#00292D] text-[#F8F8FF] hover:bg-[#00292D]/90">
                             <Link href={active === "Buy" ? "/buy/properties-for-sale" : active === "Rent" ? "/rent/properties-for-rent" : "/off-plan/latest-off-plan-projects"}>

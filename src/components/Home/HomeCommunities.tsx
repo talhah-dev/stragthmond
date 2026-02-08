@@ -94,9 +94,9 @@ function CommunityCard({ item, tone,index }: { item: Community; tone: "mint" | "
                         <div className="truncate text-base font-semibold text-[#00292D]">{item.name}</div>
                         <div className="mt-1 truncate text-sm text-[#00292D]/65">{item.subtitle}</div>
                     </div>
-                    <div className="shrink-0 rounded-full bg-[#00292D]/5 px-3 py-1 text-xs font-semibold text-[#00292D]/70">
+                    {/* <div className="shrink-0 rounded-full bg-[#00292D]/5 px-3 py-1 text-xs font-semibold text-[#00292D]/70">
                         {item.listings}
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#00292D] transition group-hover:translate-x-0.5">

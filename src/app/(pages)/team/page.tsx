@@ -59,7 +59,7 @@ export default function Team() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Meet Our Team"
+                    heading="Team"
                     subheading="A Dubai-first advisory team focused on clarity, structure, and trusted guidance across buying, renting, selling, and off-plan opportunities."
                 />
 

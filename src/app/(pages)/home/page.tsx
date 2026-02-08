@@ -1,16 +1,12 @@
-"use client";
-
 import UserWrapper from '@/app/(wrapper)/UserWrapper';
-import SiteFooter from '@/components/Footer'
 import Home2 from '@/components/Home/Home2';
 import HomeAboutQuote from '@/components/Home/HomeAboutQuote'
 import HomeCommunities from '@/components/Home/HomeCommunities'
 import HomeFeaturedProperties from '@/components/Home/HomeFeaturedProperties'
 import HomeNewsInsights from '@/components/Home/HomeNewsInsights'
-import HomeServices from '@/components/Home/HomeServices'
 import HomeTimeline from '@/components/Home/HomeTimeline'
 import HomeVideoFeatureSection from '@/components/Home/HomeVideoFeatureSection'
-import SiteNavbar from '@/components/Navbar'
+import { TextEffectOne } from 'react-text-animate';
 
 export default function HomePg() {
     return (
@@ -19,6 +15,7 @@ export default function HomePg() {
             <div className='overflow-hidden'>
                 {/* <HomeHero /> */}
                 <Home2 />
+
                 {/* <HomeLogoMarquee /> */}
                 <HomeAboutQuote />
                 {/* <section className="bg-[#F8F8FF]">
@@ -54,11 +51,11 @@ export default function HomePg() {
                     </div>
                 </div>
             </section> */}
-                <HomeServices />
+                {/* <HomeServices /> */}
+                <HomeCommunities />
                 <HomeVideoFeatureSection />
                 <HomeTimeline />
                 <HomeFeaturedProperties />
-                <HomeCommunities />
                 {/* <HomeWhyStrathmond /> */}
                 <HomeNewsInsights />
             </div >
