@@ -112,7 +112,7 @@ export default function RentPropertyInDubaiPage() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Rent Property"
+                    heading="Rent Property in Dubai"
                     subheading="A premium renting experience—curated options, fast viewings, and clear guidance from shortlist to move-in."
                 />
 

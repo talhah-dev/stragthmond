@@ -87,7 +87,7 @@ export default function WhyRentWithUsPage() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Rent with Strathmond"
+                    heading="Why Rent with Strathmond"
                     subheading="A premium renting experience in Dubai—curated options, fast coordination, and clear guidance from viewing to move-in."
                 />
 

@@ -69,7 +69,7 @@ export default function SellYourProperty() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Sell Property"
+                    heading="Sell Your Property"
                     subheading="A premium selling experience—pricing clarity, curated buyer targeting, and structured handling from valuation to closing."
                 />
 

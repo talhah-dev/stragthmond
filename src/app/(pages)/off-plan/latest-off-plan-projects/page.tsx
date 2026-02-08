@@ -218,7 +218,7 @@ export default function OffPlanProperties() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Off Plan"
+                    heading="Off Plan Properties"
                     subheading="New launches and early opportunities across Dubai—payment plans, handover timelines, and clean coordination end-to-end."
                 />
 

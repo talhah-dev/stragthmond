@@ -89,7 +89,7 @@ export default function OffPlanPropertiesInDubaiPage() {
                 <HeroSections
                     video="https://www.pexels.com/download/video/17224771/"
                     poster="https://res.cloudinary.com/dpkp4hymz/image/upload/v1770115481/Screenshot_2026-02-03_154428_di3hus.png"
-                    heading="Off Plan Properties"
+                    heading="Off Plan Properties in Dubai"
                     subheading="Explore new launches with clarity—payment plans, project comparisons, and risk-aware recommendations."
                 />
 
