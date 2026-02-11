@@ -9,17 +9,17 @@ import Image from "next/image";
 
 const footerLinks = {
     explore: [
-        { label: "Property for sale", href: "/buy/properties-for-sale" },
-        { label: "Property for rent", href: "/rent/properties-for-rent" },
-        { label: "Latest off plan projects", href: "/off-plan/latest-off-plan-projects" },
-        { label: "Buy property", href: "/buy/buy-property" },
-        { label: "Rent property", href: "/rent/rent-property" },
+        { label: "Property for sale", href: "/cooming-soon", key: 1 },
+        { label: "Property for rent", href: "/cooming-soon", key: 2},
+        { label: "Latest off plan projects", href: "/off-plan/latest-off-plan-projects", key: 3},
+        { label: "Buy property", href: "/buy/buy-property", key: 4},
+        { label: "Rent property", href: "/rent/rent-property", key: 5 },
     ],
     company: [
-        { label: "About", href: "/about" },
-        { label: "Careers", href: "/careers" },
-        { label: "Blog", href: "/blog" },
-        { label: "Contact", href: "/contact" },
+        { label: "About", href: "/about", key: 1},
+        { label: "Careers", href: "/careers", key: 2},
+        { label: "Blog", href: "/blog", key: 3},
+        { label: "Contact", href: "/contact", key: 4},
     ],
 };
 
@@ -82,7 +82,7 @@ export default function SiteFooterLight() {
                                         <div className="mt-4 flex flex-col gap-3">
                                             {footerLinks.explore.map((l) => (
                                                 <Link
-                                                    key={l.href}
+                                                    key={l.key}
                                                     href={l.href}
                                                     className="text-[#00292D]/70 hover:text-[#00292D]"
                                                 >
